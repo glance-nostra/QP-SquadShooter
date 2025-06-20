@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - QP_Tag_01
+  - QP_Tag_02
+  - QP_Tag_03
+  - QP_Tag_04
+  - QP_Tag_05
+  - QP_Tag_06
+  - QP_Tag_07
+  - QP_Tag_08
+  - QP_Tag_09
+  - QP_Tag_10
+  - QP_Tag_11
+  - QP_Tag_12
+  - QP_Tag_13
+  - QP_Tag_14
+  - QP_Tag_15
+  - QP_Tag_16
+  - QP_Tag_17
+  - QP_Tag_18
+  - QP_Tag_19
+  - QP_Tag_20
+  - QP_Tag_21
+  - QP_Tag_22
+  - QP_Tag_23
+  - QP_Tag_24
+  - QP_Tag_25
+  - QP_Tag_26
+  - QP_Tag_27
+  - QP_Tag_28
+  - QP_Tag_29
+  - QP_Tag_30
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - QP_Layer_01
+  - QP_Layer_02
+  - QP_Layer_03
+  - QP_Layer_04
+  - QP_Layer_05
+  - QP_Layer_06
+  - QP_Layer_07
+  - QP_Layer_08
+  - QP_Layer_09
+  - QP_Layer_10
+  - QP_Layer_11
+  - QP_Layer_12
+  - QP_Layer_13
+  - QP_Layer_14
+  - QP_Layer_15
+  - QP_Layer_16
+  - QP_Layer_17
+  - QP_Layer_18
+  - QP_Layer_19
+  - QP_Layer_20
+  - QP_Layer_21
+  - QP_Layer_22
+  - QP_Layer_23
+  - QP_Layer_24
+  - recording
+  - Platform
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  - Light Layer 1
+  - Light Layer 2
+  - Light Layer 3
+  - Light Layer 4
+  - Light Layer 5
+  - Light Layer 6
+  - Light Layer 7

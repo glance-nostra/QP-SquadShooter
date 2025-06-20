@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -171701014, guid: d3eeb1592b7d249a4b2c17e662bb1b4c, type: 3}
+  m_Name: ProdGameList
+  m_EditorClassIdentifier: 
+  games:
+  - gameAddress: game_colorclash
+    gameName: 
+    base_game_id: 67f1f8e39cbd9c8264cf68a6
+    gameTitleImg: {fileID: 21300000, guid: aa279eacf59164802a03d26e41b15e22, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 2c9fdee1f96c642af97e729ce1f505af, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 2457dbae22b4d45018c72f4873e9902c, type: 3}
+    canLoadGame: 0
+    catalogUrl: https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/color_clash/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_shapeshift
+    gameName: 
+    base_game_id: 6851377b952b4d173b2b122c
+    gameTitleImg: {fileID: 21300000, guid: e48fd9375e2434bf79bcc1dfaf29b459, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: e73f247a6b0ba4a75bd5d930e3c95dbc, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 2ccd154a2c427477ebe5100c4ed37a69, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/shape_shift/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_stairrace
+    gameName: 
+    base_game_id: 67f1f8bd9cbd9c8264cf68a2
+    gameTitleImg: {fileID: 21300000, guid: 9cc54f5cd2f794106a882c2d08fc6f01, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 91ed7f3cc6a4844138830ad15c38dace, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: f65b8170045a64be3b10c89849d6e372, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/stair_race/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_jailbreak
+    gameName: 
+    base_game_id: 683edbcae3ee10c311fb75c4
+    gameTitleImg: {fileID: 21300000, guid: acfc7cc4913b24364aad8c41446fcff8, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: d4502824ae9a64bbeb4a05cfcdb9ce1c, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 5e33dcb2e097e4745bae854580f51531, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/jail_break/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0

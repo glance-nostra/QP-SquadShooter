@@ -1,0 +1,17 @@
+<linker>
+  <assembly fullname="ColorClash">
+    <type fullname="ColorClash.ColorClashHandler" preserve="all"/>
+  </assembly>
+  <assembly fullname="StairRace">
+    <type fullname="StairRace.StairRaceController" preserve="all"/>
+  </assembly>
+  <assembly fullname="DangerField">
+    <type fullname="nostra.sarvottam.dangerfield" preserve="all"/>
+  </assembly>
+  <assembly fullname="Jailbreak">
+    <type fullname="nostra.pkpl.JailBreakGame" preserve="all"/>
+  </assembly>
+  <assembly fullname="ShapeShifting">
+    <type fullname="nostra.pkpl.ShapeShifting" preserve="all"/>
+  </assembly>
+</linker>

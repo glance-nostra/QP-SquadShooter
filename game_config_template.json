@@ -1,0 +1,15 @@
+{
+  "game_name": "GameName",
+  "prefab_path": "Assets/Games/GameName/GameNameGame.prefab",
+  "addressable_settings": {
+    "group_name": "GameName",
+    "build_paths": {
+      "staging": "ServerData/Staging/QuickPlay/GameName/[BuildTarget]",
+      "production": "ServerData/Production/QuickPlay/GameName/[BuildTarget]"
+    },
+    "load_paths": {
+      "staging": "https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/GameName/[BuildTarget]",
+      "production": "https://g-mob-community-cdn.glance-cdn.com/storage/addressables/QuickPlay/GameName/[BuildTarget]"
+    }
+  }
+}

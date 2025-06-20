@@ -1,0 +1,25 @@
+{
+    "env": "dev",
+    "buildType": "debug",
+    "clientType": "standalone",
+    "clientApp": "NOSTRA_APP",
+    "appInfo": {
+        "version_name": "v0.1.8-devDebug",
+        "version_code": 18
+    },
+    "userInfo": {
+        "user_id": "c78c7fad-f756-424b-b117-133da6f8a328",
+        "user_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VySW5mbyIsInVzZXJJZCI6IjcyMGE3ZjA4LTYzNzUtNDUzYi1hN2M0LWE4YzMwYWI2OWMyNiIsImNvbW11bml0eVVzZXJJZCI6IjY2YTBlYTZjODkwNjY4ZjJkODdmNWFjOCIsImlhdCI6MTc0NDExOTk1NCwiZXhwIjoxNzUxODk1OTU0fQ.sthz--2VJtPx09_Q_NI5BUP4toXdRmxL8BYLlur41sQ",
+        "user_profile_url": "https://g-mob-gaming-non-prod.glance-cdn.com/avatar/66a0ea6c890668f2d87f5ac8/67ef6514457a54ca9ff4e439/reactor_faceswap/e2462c.webp",
+        "user_name": "pocod"
+    },
+    "isUserLoggedIn": true,
+    "unityData": null
+    // "unityData": {
+    //     "post_type": "QUICK_PLAY_CHARACTER_POST",
+    //     "character": {
+    //         "char_id": "684c1257c1edd4ff96157005"
+    //     },
+    //     "shareStatus": "DRAFT"
+    // }
+}
