@@ -47,7 +47,8 @@ namespace NostraTools.Editor
             "UnityEngine.InputSystem",
             "Unity.TextMeshPro",
             "Unity.Mathematics",
-            "Unity.InputSystem",  // Added Unity.InputSystem reference
+            "Unity.InputSystem",
+            "Unity.AI.Navigation",  
             "JoystickPack"        // Added JoystickPack as an assembly reference
         };
 
@@ -56,7 +57,8 @@ namespace NostraTools.Editor
         {
             "NostraCore.dll",
             "NostraRemote.dll",
-            "QuickPlay.dll"
+            "QuickPlay.dll",
+            "ChronoStream.dll"
         };
         
         // Common third-party precompiled references

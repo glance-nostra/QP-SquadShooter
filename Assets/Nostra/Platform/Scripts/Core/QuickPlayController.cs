@@ -181,6 +181,7 @@ namespace nostra.platform.Core
                 {
                     postData.game.address = post.addressablePath;
                     postData.game.name = post.name;
+                    postData.catalogUrl = post.catalogUrl;
                     defaultPosts.Add(postData);
                 }
             }

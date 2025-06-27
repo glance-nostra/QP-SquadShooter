@@ -58,8 +58,8 @@ public class AddressableTools
         bool modified = false;
 
         // Update build paths
-        content = RegexReplaceIfMatch(content, @"(m_Value:\s*')(ServerData/Production/QuickPlay/.+?/)(\[BuildTarget\]')", $"$1{buildPathProduction}$3", ref modified, "Production build path");
-        content = RegexReplaceIfMatch(content, @"(m_Value:\s*')(ServerData/Staging/QuickPlay/.+?/)(\[BuildTarget\]')", $"$1{buildPathStaging}$3", ref modified, "Staging build path");
+        content = RegexReplaceIfMatch(content, @"(m_Value:\s*')(ServerData/Production/QuickPlay/)(\[BuildTarget\]')", $"$1{buildPathProduction}$3", ref modified, "Production build path");
+        content = RegexReplaceIfMatch(content, @"(m_Value:\s*')(ServerData/Staging/QuickPlay/)(\[BuildTarget\]')", $"$1{buildPathStaging}$3", ref modified, "Staging build path");
 
         // Update load paths
         content = RegexReplaceIfMatch(content, @"(m_Value:\s*')[^']*g-mob\.glance-cdn\.com[^']*(')", $"$1{loadPathProduction}$2", ref modified, "Production load path");
@@ -268,6 +268,7 @@ public class AddressableTools
         public class AddressableSettings
         {
             public string group_name;
+            public string game_address;
             public BuildPaths build_paths;
             public BuildPaths load_paths;
             
@@ -330,8 +331,7 @@ public class AddressableTools
             // Add the prefab to the addressable group
             var prefabGUID = AssetDatabase.AssetPathToGUID(gameConfig.prefab_path);
             var entry = settings.CreateOrMoveEntry(prefabGUID, group);
-            // Use game_<lowercase game name> as the standard naming convention for game addressables
-            entry.address = "game_" + gameConfig.game_name.ToLower();
+            entry.address = gameConfig.addressable_settings.game_address;
             
             Debug.Log($"Added prefab to addressable group: {entry.address} (GUID: {prefabGUID})");
             

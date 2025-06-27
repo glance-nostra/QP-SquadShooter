@@ -9,6 +9,57 @@ namespace NostraTools.Editor
 {
     public static class RemapDllUtils
     {
+
+        private static string gameScriptsPath = "";
+        private static bool isVerbose = false;
+        private static bool shouldRemap = false;
+        private static string gameName = "";
+        public static void Main(){
+            ParseCommandLineArguments();
+            if (string.IsNullOrEmpty(gameScriptsPath))
+            {
+                Debug.LogError("No scripts path provided. Use -scriptsPath <path> to specify.");
+                return;
+            }
+            if (string.IsNullOrEmpty(gameName))
+            {
+                Debug.LogError("No game name provided. Use -gameName <name> to specify.");
+                return;
+            }
+            string dllAssemblyName = $"{gameName}.dll";
+            RemapToDllAssembly(dllAssemblyName, gameScriptsPath);
+
+        }
+
+        private static void ParseCommandLineArguments()
+        {
+            string[] args = System.Environment.GetCommandLineArgs();
+            
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "-scriptsPath" && i + 1 < args.Length)
+                {
+                    gameScriptsPath = args[i + 1];
+                    Debug.Log($"Scripts path: {gameScriptsPath}");
+                }
+                else if (args[i] == "-verbose")
+                {
+                    isVerbose = true;
+                    Debug.Log("Verbose logging enabled");
+                }
+                else if (args[i] == "-remap")
+                {
+                    shouldRemap = true;
+                    Debug.Log("Remapping enabled");
+                }
+                else if (args[i] == "-gameName" && i + 1 < args.Length)
+                {
+                    gameName = args[i + 1];
+                    Debug.Log($"Game name: {gameName}");
+                }
+            }
+        }
+
         public static void RemapToDllAssembly(string targetAssemblyName, string searchDirectory)
         {
             Debug.Log($"Starting MonoScript remapping for assembly: {targetAssemblyName} in {searchDirectory}");

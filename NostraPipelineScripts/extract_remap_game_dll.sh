@@ -77,7 +77,7 @@ if [[ "$SHOULD_REMAP" == "true" ]]; then
 fi
 
 # Execute Unity with the extract and remap tool
-echo "🔄 Extracting DLLs and remapping prefabs..."
+echo "🔄 Extracting DLLs..."
 "$UNITY_PATH" \
   -batchmode \
   -projectPath "$PROJECT_PATH" \
@@ -90,17 +90,17 @@ echo "🔄 Extracting DLLs and remapping prefabs..."
 # Check exit code
 EXIT_CODE=$?
 if [[ $EXIT_CODE -eq 0 ]]; then
-  if [[ "$SHOULD_REMAP" == "true" ]]; then
-    echo "✅ DLL extraction and prefab remapping completed successfully!"
-  else
-    echo "✅ DLL extraction completed successfully! (Remapping was disabled)"
-  fi
-  exit 0
+  echo "✅ DLL extraction completed successfully!"
 else
-  if [[ "$SHOULD_REMAP" == "true" ]]; then
-    echo "❌ DLL extraction and remapping failed with exit code $EXIT_CODE!"
-  else
-    echo "❌ DLL extraction failed with exit code $EXIT_CODE!"
-  fi
+  echo "❌ DLL extraction failed with exit code $EXIT_CODE! Skipping remapping."
   exit 1
+fi
+
+# Call Remap script if remapping is enabled
+if [[ "$SHOULD_REMAP" == "true" ]]; then
+  echo "🔄 Calling remap script... "
+  chmod +x "$PLATFORM_PATH/NostraPipelineScripts/remap_dlls.sh"
+  "$PLATFORM_PATH/NostraPipelineScripts/remap_dlls.sh" "$GAME_NAME"
+else
+  echo "ℹ️ Remapping is disabled, skipping remap script."
 fi

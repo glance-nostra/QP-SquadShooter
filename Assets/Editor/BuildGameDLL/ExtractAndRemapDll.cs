@@ -43,21 +43,21 @@ namespace NostraTools.Editor
                 int extractedCount = ExtractDlls(gameScriptsPath, extractedAssemblies);
                 Log($"Extraction complete: {extractedCount} DLLs processed");
                 
-                // Step 2: Remap prefabs if requested
-                if (shouldRemap && extractedCount > 0)
-                {
-                    foreach (string assemblyName in extractedAssemblies)
-                    {
-                        Log($"Remapping prefabs for assembly: {assemblyName}");
-                        string dllAssemblyName = $"{assemblyName}.dll";
-                        RemapDllUtils.RemapToDllAssembly(dllAssemblyName, gameScriptsPath);
-                    }
-                    Log("Remapping complete");
-                }
-                else {
-                    //print shouldRemap and extractedCount
-                    Log($"Remapping skipped. shouldRemap: {shouldRemap}, extractedCount: {extractedCount}");
-                }
+                // // Step 2: Remap prefabs if requested
+                // if (shouldRemap && extractedCount > 0)
+                // {
+                //     foreach (string assemblyName in extractedAssemblies)
+                //     {
+                //         Log($"Remapping prefabs for assembly: {assemblyName}");
+                //         string dllAssemblyName = $"{assemblyName}.dll";
+                //         RemapDllUtils.RemapToDllAssembly(dllAssemblyName, gameScriptsPath);
+                //     }
+                //     Log("Remapping complete");
+                // }
+                // else {
+                //     //print shouldRemap and extractedCount
+                //     Log($"Remapping skipped. shouldRemap: {shouldRemap}, extractedCount: {extractedCount}");
+                // }
             }
             catch (Exception ex)
             {

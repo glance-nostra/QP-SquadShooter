@@ -1,0 +1,609 @@
+name: Game Processing (DLL Remapping and Verification, Addressables Build)
+
+on:
+  # Run on issue comments
+  issue_comment:
+    types: [created]
+
+jobs:
+  game-processing:
+    name: Game Processing
+    if: |
+      github.event.issue.pull_request &&
+      (contains(github.event.comment.body, 'verify') || contains(github.event.comment.body, 'build')) &&
+      github.event.comment.user.type == 'User'&&
+      github.event.comment.user.login != 'checkmarx_inmobi'
+    runs-on: qp-games-runner
+
+    permissions:
+      contents: read
+      pull-requests: write
+    
+    steps:      
+      - name: Set variables
+        id: vars
+        run: |
+          echo "PR_NUMBER=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+          echo "REPO=${{ github.repository }}" >> $GITHUB_OUTPUT
+          PR_URL="${{ github.event.issue.pull_request.url }}"
+          PR_DETAILS=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "$PR_URL")
+          BASE_BRANCH=$(echo "$PR_DETAILS" | jq -r '.base.ref')
+          HEAD_BRANCH=$(echo "$PR_DETAILS" | jq -r '.head.ref')
+          echo "BASE_BRANCH=$BASE_BRANCH" >> $GITHUB_ENV
+          echo "HEAD_BRANCH=$HEAD_BRANCH" >> $GITHUB_ENV
+          
+          # Determine if verification or build was requested
+          COMMENT="${{ github.event.comment.body }}"
+
+          if [[ "$COMMENT" =~ verify ]]; then
+            echo "VERIFICATION_REQUESTED=true" >> $GITHUB_ENV
+          else
+            echo "VERIFICATION_REQUESTED=false" >> $GITHUB_ENV
+          fi
+          
+          if [[ "$COMMENT" =~ build ]]; then
+            echo "BUILD_REQUESTED=true" >> $GITHUB_ENV
+          else
+            echo "BUILD_REQUESTED=false" >> $GITHUB_ENV
+          fi
+
+          
+
+      - name: Add rocket reaction to trigger comment
+        id: add-rocket
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              await github.rest.reactions.createForIssueComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: ${{ github.event.comment.id }},
+                content: 'rocket'
+              });
+              console.log('Added rocket reaction successfully');
+            } catch (error) {
+              console.log(`Failed to add reaction: ${error.message}`);
+              return 'failed';
+            }
+            return 'success';
+      
+      - name: Parse Command
+        id: parse-command
+        run: |
+          COMMENT="${{ github.event.comment.body }}"
+          COMMENT_LOWER=$(echo "$COMMENT" | tr '[:upper:]' '[:lower:]')
+          
+          echo "📥 Full comment: $COMMENT"
+
+          BUILD_ENV=""
+          BUILD_TARGETS=()
+
+          # Define normalization functions (inside the run block!)
+          normalize_env() {
+            case "$1" in
+              staging) echo "Staging" ;;
+              production) echo "Production" ;;
+              *) echo "" ;;
+            esac
+          }
+
+          normalize_target() {
+            case "$1" in
+              android) echo "Android" ;;
+              ios) echo "iOS" ;;
+              webgl) echo "WebGL" ;;
+              standaloneosx) echo "StandaloneOSX" ;;
+              *) echo "" ;;
+            esac
+          }
+
+          # Parse environment
+          if [[ "$COMMENT_LOWER" =~ env=([a-z0-9_]+) ]]; then
+            ENV_KEY="${BASH_REMATCH[1]}"
+            BUILD_ENV=$(normalize_env "$ENV_KEY")
+            if [[ -z "$BUILD_ENV" ]]; then
+              echo "❌ Invalid env: $ENV_KEY. Allowed: Staging, Production"
+              exit 1
+            fi
+            echo "✅ Environment set to: $BUILD_ENV"
+          fi
+
+          # Parse targets
+          if [[ "$COMMENT_LOWER" =~ targets=([a-z0-9_,]+) ]]; then
+            IFS=',' read -ra RAW_TARGETS <<< "${BASH_REMATCH[1]}"
+            VALID_TARGETS=()
+            for t in "${RAW_TARGETS[@]}"; do
+              NORMALIZED=$(normalize_target "$t")
+              if [[ -z "$NORMALIZED" ]]; then
+                echo "❌ Invalid target: $t. Allowed: Android, iOS, WebGL, StandaloneOSX"
+                exit 1
+              fi
+              VALID_TARGETS+=("$NORMALIZED")
+            done
+            echo "✅ Targets: ${VALID_TARGETS[*]}"
+          fi
+
+          # Output back to GitHub Actions
+          echo "build_env=$BUILD_ENV" >> "$GITHUB_OUTPUT"
+          echo "build_targets=$(IFS=,; echo "${VALID_TARGETS[*]}")" >> "$GITHUB_OUTPUT"
+
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.HEAD_BRANCH }}
+      
+      - name: Get Game Name
+        id: get-game-name
+        continue-on-error: true
+        run: |
+          # First try root directory
+          CONFIG_FILE="./game_config_template.json"
+          if [ -f "$CONFIG_FILE" ]; then
+            # Check if jq is installed
+            if command -v jq &> /dev/null; then
+              GAME_NAME=$(jq -r '.game_name' "$CONFIG_FILE")
+              echo "Game name read from root config file: $GAME_NAME"
+            fi
+          else
+            echo "Config file not found at $CONFIG_FILE"
+          fi
+
+          # Fail the workflow if game name is still not found
+          if [ -z "$GAME_NAME" ]; then
+            echo "::error::Game name could not be determined from comment or config file"
+            exit 1
+          fi
+          
+          echo "GAME_NAME=$GAME_NAME" >> $GITHUB_ENV
+          echo "Final game name to be used: $GAME_NAME"
+
+      - name: Verify Game Config Template
+        id: verify-game-config
+        continue-on-error: true
+        run: |
+          echo "Verifying game config template..."
+          CONFIG_FILE="./game_config_template.json"
+          
+          # Get the content of the config file
+          CONFIG_CONTENT=$(cat "$CONFIG_FILE")
+          
+          # Check for any remaining instances of "GameName" in the config file
+          if grep -q "GameName" "$CONFIG_FILE"; then
+            echo "::error::Found instances of 'GameName' in the config file that need to be replaced with your actual game name."
+            echo "The following lines contain 'GameName':"
+            grep -n "GameName" "$CONFIG_FILE"
+            
+            # Create a more detailed error message
+            ERROR_MSG="Your game_config_template.json still contains instances of the placeholder GameName that need to be replaced with ${{ env.GAME_NAME }}."
+            
+            echo "$ERROR_MSG"
+            echo "GAME_CONFIG_ERROR=$ERROR_MSG" >> $GITHUB_ENV
+            exit 1
+          fi
+          
+          echo "✅ Game config template is correctly configured."
+      
+      - name: Verify Scripts
+        id: verify-scripts
+        continue-on-error: true
+        if: env.VERIFICATION_REQUESTED == 'true' || env.BUILD_REQUESTED == 'true'
+        run: |
+          echo "Verifying Game Scripts"
+          chmod +x ./NostraPipelineScripts/qp-verify
+          
+          # Create a JSON file to store all verification results
+          VERIFY_RESULTS_FILE="./verification_results.json"
+          echo "{}" > "$VERIFY_RESULTS_FILE"
+          
+          set +e  # Allow errors temporarily
+          # Run verification and capture output
+          SCRIPTS_OUTPUT=$(./NostraPipelineScripts/qp-verify Assets/Games 2>&1)
+          SCRIPTS_VERIFY_EXIT_CODE=$?
+          set -e  # Re-enable error checking
+          
+          # Update the JSON file with scripts verification results
+          cat <<EOF | jq -s '.[0] * .[1]' "$VERIFY_RESULTS_FILE" - > temp.json && mv temp.json "$VERIFY_RESULTS_FILE"
+          {
+            "scripts_verify_status": $SCRIPTS_VERIFY_EXIT_CODE,
+            "scripts_verify_output": $(echo "$SCRIPTS_OUTPUT" | jq -R -s .)
+          }
+          EOF
+          
+          # Save the verification results to an environment variable for the comment
+          echo "VERIFY_RESULTS<<EOF" >> $GITHUB_ENV
+          cat "$VERIFY_RESULTS_FILE" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          
+          # Exit with the original exit code
+          exit $SCRIPTS_VERIFY_EXIT_CODE
+          
+      
+      - name: Extract and Remap DLLs
+        id: extract-dlls
+        run: |
+          chmod +x ./NostraPipelineScripts/extract_remap_game_dll.sh
+          ./NostraPipelineScripts/extract_remap_game_dll.sh ${{ env.GAME_NAME }}
+      
+      
+      - name: List Generated DLLs
+        run: ls -la ./Assets/Games/${{ env.GAME_NAME }}
+
+      - name: Setup .NET and Tools
+        if: env.VERIFICATION_REQUESTED == 'true' || env.BUILD_REQUESTED == 'true'
+        run: |
+          echo "Detecting system architecture..."
+          ARCH=$(uname -m)
+          echo "System architecture: $ARCH"
+          
+          # Download the dotnet-install script
+          echo "Downloading .NET installation script..."
+          curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh
+          chmod +x dotnet-install.sh
+          
+          # Install the specific SDK version (skipping if already exists)
+          if [[ "$ARCH" == "arm64" ]]; then
+            echo "Installing .NET SDK 8.0.407 for arm64..."
+            ./dotnet-install.sh --version 8.0.407 --install-dir $HOME/.dotnet --architecture arm64
+            
+            echo "Installing .NET Runtime 8.0.0 for arm64..."
+            ./dotnet-install.sh --runtime dotnet --version 8.0.0 --install-dir $HOME/.dotnet --architecture arm64
+          else
+            echo "Installing .NET SDK 8.0.407 for x64..."
+            ./dotnet-install.sh --version 8.0.407 --install-dir $HOME/.dotnet
+            
+            echo "Installing .NET Runtime 8.0.0 for x64..."
+            ./dotnet-install.sh --runtime dotnet --version 8.0.0 --install-dir $HOME/.dotnet
+          fi
+          
+          # Configure PATH to use our .NET installation
+          echo "Setting up environment to use .NET 8..."
+          export DOTNET_ROOT=$HOME/.dotnet
+          export PATH=$HOME/.dotnet:$PATH
+          
+          # Verify the correct .NET is being used
+          echo "Verifying .NET version..."
+          which dotnet
+          dotnet --version
+          
+          # Install ilspycmd globally
+          echo "Installing ilspycmd with .NET 8..."
+          dotnet tool install --global ilspycmd
+          
+          # Add .NET tools to PATH locally
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          
+          # Verify ilspycmd installation
+          echo "Verifying ilspycmd installation..."
+          which ilspycmd || echo "ilspycmd not found in PATH after installation"
+          ilspycmd --version || echo "ilspycmd version check failed"
+        
+
+      - name: Verify Game DLL
+        id: verify-dll
+        if: env.VERIFICATION_REQUESTED == 'true' || env.BUILD_REQUESTED == 'true'
+        run: |
+          # Use our .NET 8 installation
+          export DOTNET_ROOT=$HOME/.dotnet
+          export PATH=$HOME/.dotnet:$PATH
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          
+          chmod +x ./NostraPipelineScripts/qp-verify
+          
+          # Ensure path to DLL is correct
+          DLL_PATH="./Assets/Games/${{ env.GAME_NAME }}/${{ env.GAME_NAME }}.dll"
+          if [ ! -f "$DLL_PATH" ]; then
+            echo "::error::DLL file not found at expected path: $DLL_PATH"
+            exit 1
+          fi
+          
+          echo "Found DLL at: $DLL_PATH"
+          
+          # Get the verification results JSON file
+          VERIFY_RESULTS_FILE="./verification_results.json"
+          if [ ! -f "$VERIFY_RESULTS_FILE" ]; then
+            echo "{}" > "$VERIFY_RESULTS_FILE"
+          fi
+          
+          set +e  # Allow errors temporarily
+          # Run verification with detailed output and capture results
+          echo "Running verification..."
+          DLL_OUTPUT=$(./NostraPipelineScripts/qp-verify "$DLL_PATH" --bin 2>&1)
+          DLL_VERIFY_EXIT_CODE=$?
+          set -e  # Re-enable error checking
+
+          
+          # Update the JSON file with DLL verification results
+          cat <<EOF | jq -s '.[0] * .[1]' "$VERIFY_RESULTS_FILE" - > temp.json && mv temp.json "$VERIFY_RESULTS_FILE"
+          {
+            "dll_verify_status": $DLL_VERIFY_EXIT_CODE,
+            "dll_verify_output": $(echo "$DLL_OUTPUT" | jq -R -s .)
+          }
+          EOF
+
+          
+          # Save the complete verification results to an environment variable for the comment
+          echo "VERIFY_RESULTS<<EOF" >> $GITHUB_ENV
+          cat "$VERIFY_RESULTS_FILE" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+          # Exit with the original exit code
+          exit $DLL_VERIFY_EXIT_CODE
+
+      - name: Upload Game DLL
+        id: upload-dll
+        if: env.BUILD_REQUESTED == 'true' && steps.verify-scripts.outcome == 'success' && steps.verify-dll.outcome == 'success'
+        run: |
+          # Use PR_NUMBER as a local variable
+          PR_NUMBER="${{ github.event.issue.number }}"
+          chmod +x ./NostraPipelineScripts/upload_game_dll_to_s3.sh
+          
+          # Create a file to store upload results
+          RESULTS_FILE="./dll_upload_results.json"
+          
+          # Execute the upload script and pass the PR number and results file
+          RESULTS_FILE="$RESULTS_FILE" PR_NUMBER="$PR_NUMBER" ./NostraPipelineScripts/upload_game_dll_to_s3.sh
+          
+          # If results file exists and contains URL, set output
+          if [ -f "$RESULTS_FILE" ]; then
+            DLL_URL=$(jq -r '.dll_url' "$RESULTS_FILE")
+            echo "DLL_URL=$DLL_URL" >> $GITHUB_ENV
+            echo "DLL upload successful! URL: $DLL_URL"
+          else
+            echo "::warning::Upload completed but no results file was found"
+          fi
+        
+
+      - name: Build Addressables
+        id: build-addressables
+        if: env.BUILD_REQUESTED == 'true'
+        env:
+          PROFILE: ${{ steps.parse-command.outputs.build_env }}
+          TARGETS: ${{ steps.parse-command.outputs.build_targets }}
+        run: |
+          echo "🔐 Building Addressables for environment: $PROFILE"
+          echo "🔐 Building for targets: $TARGETS"
+          
+          chmod +x ./NostraPipelineScripts/build_addressables.sh
+          
+          # Create a file to store build results
+          BUILD_RESULTS_FILE="./addressables_build_results.json"
+          echo "{}" > "$BUILD_RESULTS_FILE"
+          
+          set +e  # Allow errors temporarily
+          # Run the build and capture output
+          BUILD_OUTPUT=$(./NostraPipelineScripts/build_addressables.sh 2>&1)
+          BUILD_EXIT_CODE=$?
+          set -e  # Re-enable error checking
+          
+          # Strip ANSI color codes from the output
+          CLEAN_OUTPUT=$(echo "$BUILD_OUTPUT" | sed 's/\x1b\[[0-9;]*m//g')
+          
+          # Update the JSON file with build results
+          cat <<EOF | jq -s '.[0] * .[1]' "$BUILD_RESULTS_FILE" - > temp.json && mv temp.json "$BUILD_RESULTS_FILE"
+          {
+            "addressables_build_status": $BUILD_EXIT_CODE,
+            "addressables_build_output": $(echo "$CLEAN_OUTPUT" | jq -R -s .)
+          }
+          EOF
+          
+          # Save the build results to an environment variable for the comment
+          echo "ADDRESSABLES_BUILD_RESULTS<<EOF" >> $GITHUB_ENV
+          cat "$BUILD_RESULTS_FILE" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          
+          # Exit with the original exit code
+          exit $BUILD_EXIT_CODE
+
+      
+      - name: Upload Addressables
+        if: env.BUILD_REQUESTED == 'true' && steps.build-addressables.outcome == 'success'
+        env:
+          PROFILE: ${{ steps.parse-command.outputs.build_env }}
+          TARGETS: ${{ steps.parse-command.outputs.build_targets }}
+        run: |
+          echo "🔐 Uploading Addressables for environment: $PROFILE"
+          echo "🔐 Uploading for targets: $TARGETS"
+          chmod +x ./NostraPipelineScripts/upload_addressables_to_s3.sh
+          ./NostraPipelineScripts/upload_addressables_to_s3.sh
+
+        
+      - name: Add final reaction to trigger comment
+        if: always()
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              // Add thumbs up/down reaction based on job status
+              const reaction = '${{ job.status }}' === 'success' ? '+1' : '-1';
+              await github.rest.reactions.createForIssueComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: ${{ github.event.comment.id }},
+                content: reaction
+              });
+              console.log(`Added ${reaction} reaction successfully`);
+            } catch (error) {
+              console.log(`Failed to add reaction: ${error.message}`);
+            }
+            
+      - name: Add job completion comment
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            
+            // Use step outcomes directly
+            const scriptsVerificationSuccess = '${{ steps.verify-scripts.outcome }}' === 'success';
+            const dllVerificationSuccess = '${{ steps.verify-dll.outcome }}' === 'success';
+            const gameConfigVerificationSuccess = '${{ steps.verify-game-config.outcome }}' === 'success';
+            const uploadSuccess = '${{ steps.upload-dll.outcome }}' === 'success' && '${{ steps.upload-dll.outcome }}' !== 'skipped';
+            const buildRequested = '${{ env.BUILD_REQUESTED }}' === 'true';
+            const addressablesSuccess = buildRequested ? ('${{ steps.build-addressables.outcome }}' === 'success') : true;
+            const env = '${{ steps.parse-command.outputs.build_env }}' || 'Not specified';
+            const targets = '${{ steps.parse-command.outputs.build_targets }}' || 'Not specified';
+            const workflowUrl = `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+            const dllUrl = '${{ env.DLL_URL }}' || null;
+
+            // Parse the verification results JSON
+            let verifyResults = {};
+            try {
+              if (process.env.VERIFY_RESULTS) {
+                verifyResults = JSON.parse(process.env.VERIFY_RESULTS);
+              } else {
+                console.log('VERIFY_RESULTS is undefined');
+              }
+            } catch (error) {
+              console.log('Failed to parse verification results: ' + error.message);
+              verifyResults = { scripts_verify_output: 'Error parsing results', dll_verify_output: 'Error parsing results' };
+            }
+            const verificationSuccess = gameConfigVerificationSuccess && scriptsVerificationSuccess && dllVerificationSuccess;
+            
+            // Parse addressables build results if available
+            let addressablesBuildResults = null;
+            try {
+              if (process.env.ADDRESSABLES_BUILD_RESULTS) {
+                addressablesBuildResults = JSON.parse(process.env.ADDRESSABLES_BUILD_RESULTS);
+              }
+            } catch (error) {
+              console.log('Failed to parse addressables build results: ' + error.message);
+            }
+            
+            // Status emojis
+            const verificationStatus = verificationSuccess ? '✅ Success' : '❌ Failed';
+            const uploadStatus = uploadSuccess ? '✅ Success' : (verificationSuccess ? '⚠️ Failed' : '⏭️ Skipped');
+            
+            // Get addressables build status
+            let addressablesStatus = '⏭️ Skipped';
+            if (buildRequested) {
+                addressablesStatus = addressablesSuccess ? '✅ Success' : '❌ Failed';
+            }
+
+            // Create the comment with horizontal line after heading
+            let commentBody = `### Game Processing Results\n---\n\n` +
+                              `**Triggered by:** @${{ github.event.comment.user.login }}\n`;
+            
+            // Structure the comment differently based on what was requested
+            if (buildRequested) {
+                commentBody += `**Verification:** ${verificationStatus}\n`;
+                commentBody += `**Build Addressables:** ${addressablesStatus}\n`;
+                commentBody += `  - Environment: \`${env}\`\n`;
+                commentBody += `  - Targets: \`${targets}\`\n\n`;
+
+                if (dllUrl) {
+                  commentBody += `### 📥 Download\n` +
+                                 `**Game DLL:** [Download](${ dllUrl })\n`;
+                }
+            } else { 
+                commentBody += `**Verification:** ${verificationStatus}\n\n`;
+            }
+            
+            commentBody += `**${buildRequested ? 'Build' : 'Verification'} Details:** [View Run](${workflowUrl})`;
+            
+            // Add additional information for failures - adjust based on what was requested
+            if (
+              (!buildRequested && !verificationSuccess) ||
+              (buildRequested && (!verificationSuccess || !uploadSuccess || !addressablesSuccess))
+            ) {
+              commentBody += '\n\n### ⚠️ Issues Detected\n';
+              
+              if (!gameConfigVerificationSuccess) {
+                commentBody += '- Game config template verification failed. Please check the game_config_template.json file.\n';
+                
+                // Add game config verification error in a collapsible section if available
+                const gameConfigError = '${{ env.GAME_CONFIG_ERROR }}' || '';
+                if (gameConfigError) {
+                  commentBody += '\n<details>\n';
+                  commentBody += '<summary>📊 Game Config Verification Error</summary>\n\n';
+                  commentBody += '```\n';
+                  commentBody += gameConfigError.replace(/\\n/g, '\n');
+                  commentBody += '\n```\n';
+                  commentBody += '</details>\n';
+                }
+              }
+              
+              if (!scriptsVerificationSuccess) {
+                commentBody += '- Game scripts verification failed. See report below.\n';
+                
+                // Add scripts verification report in a collapsible section
+                commentBody += '\n<details>\n';
+                commentBody += '<summary>📊 Scripts Verification Report</summary>\n\n';
+                commentBody += '```\n';
+                commentBody += verifyResults.scripts_verify_output || 'Check logs for details';
+                commentBody += '\n```\n';
+                commentBody += '</details>\n';
+              }
+              
+              if (!dllVerificationSuccess) {
+                commentBody += '- DLL verification failed. See report below.\n';
+                
+                // Add DLL verification report in a collapsible section
+                commentBody += '\n<details>\n';
+                commentBody += '<summary>📊 DLL Verification Report</summary>\n\n';
+                commentBody += '```\n';
+                commentBody += verifyResults.dll_verify_output || 'Check logs for details';
+                commentBody += '\n```\n';
+                commentBody += '</details>\n';
+              }
+              
+              if (verificationSuccess && !uploadSuccess) {
+                commentBody += '- DLL upload to S3 failed. Please check the logs for details.\n';
+              }
+              
+              if (buildRequested && !addressablesSuccess) {
+                commentBody += `- Addressables build failed. See build report below.\n`;
+                
+                // Add addressables build report in a collapsible section
+                commentBody += '\n<details>\n';
+                commentBody += '<summary>📊 Addressables Build Report</summary>\n\n';
+                commentBody += '```\n';
+                commentBody += addressablesBuildResults.addressables_build_output || 'Check logs for details';
+                commentBody += '\n```\n';
+                commentBody += '</details>\n';
+              }
+              
+              commentBody += '\nPlease fix these issues before proceeding.';
+            } else {
+              commentBody += '\n\n🚀 All checks passed!\n';
+              
+              if (buildRequested) {
+                if (dllUrl) {
+                  commentBody += ' The DLL has been successfully processed and uploaded. You can download it using the link above.';
+                } else {
+                  commentBody += ' The DLLs are ready for use, but upload failed or was skipped.';
+                }
+                
+                if (addressablesSuccess) {
+                  commentBody += `\nAddressables were successfully built for environment: \`${{ steps.parse-command.outputs.build_env }}\` and targets: \`${{ steps.parse-command.outputs.build_targets }}\`.`;
+                }
+              } else {
+                commentBody += ' Verification completed successfully. The code meets all the required standards.';
+              }
+              
+              // Add verification reports in collapsible sections even for successful runs
+              commentBody += '\n\n<details>\n';
+              commentBody += '<summary>📊 Verification Reports</summary>\n\n';
+              
+              commentBody += '**Scripts Verification:**\n```\n';
+              commentBody += verifyResults.scripts_verify_output || 'No output available';
+              commentBody += '\n```\n\n';
+              
+              commentBody += '**DLL Verification:**\n```\n';
+              commentBody += verifyResults.dll_verify_output || 'No output available';
+              commentBody += '\n```\n';
+              
+              commentBody += '</details>\n';
+            }
+            
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
+              body: commentBody
+            });
+            
