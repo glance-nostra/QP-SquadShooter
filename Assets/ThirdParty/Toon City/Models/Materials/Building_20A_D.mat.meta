@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 38b69f0a0ef206f4388a3a2380dd9b99
+timeCreated: 1571007106
+licenseType: Free
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Models/Materials/Building_20A_D.mat
+  uploadId: 585690

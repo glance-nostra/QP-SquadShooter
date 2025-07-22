@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6951a0d67fd1d47b1833367b264469e4
+timeCreated: 1491180706
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Models/Materials/Plane_D.mat
+  uploadId: 585690

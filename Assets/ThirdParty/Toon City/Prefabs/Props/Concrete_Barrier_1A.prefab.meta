@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ad836630023be4699843ac0f3f3c651b
+labels:
+- object
+- prop
+timeCreated: 1499214613
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Prefabs/Props/Concrete_Barrier_1A.prefab
+  uploadId: 585690

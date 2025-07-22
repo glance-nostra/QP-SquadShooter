@@ -1,0 +1,22 @@
+{
+    "name": "Nostra.Editor.ThirdParty.Watermelon Core.Modules.Defines.Scripts.Editor",
+    "rootNamespace": "",
+    "references": [
+        "UnityEditor",
+        "Watermelon",
+        "Core.Inspector.Editor",
+        "Core.Settings.Editor",
+        "Core.UE"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

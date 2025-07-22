@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 74060aff061cef04981722d243a5fd2f
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Documentation/URP_Instructions.txt
+  uploadId: 585690

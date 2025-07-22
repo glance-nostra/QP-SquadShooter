@@ -1,0 +1,14 @@
+{
+  "name": "qp-games-addressables-upload",
+  "version": "1.0.0",
+  "description": "Upload Addressables for QP-Games",
+  "main": "upload_addressables.js",
+  "scripts": {
+    "upload-addressables": "node upload_addressables.js"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^3.3.2"
+  },
+  "type": "module"
+}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fb57aa3acb0754d84abd0a346bd37fca
+timeCreated: 1497908258
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Animations/Camera Animations/Main Camera_Close_3.controller
+  uploadId: 585690

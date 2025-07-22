@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2439a783f1b2045f58a42071f088da64
+timeCreated: 1498467255
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Particles/Falling_Leaves.prefab
+  uploadId: 585690

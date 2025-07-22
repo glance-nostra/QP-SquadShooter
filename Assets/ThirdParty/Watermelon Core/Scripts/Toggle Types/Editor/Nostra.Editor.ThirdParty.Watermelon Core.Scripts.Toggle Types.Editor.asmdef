@@ -1,0 +1,19 @@
+{
+    "name": "Nostra.Editor.ThirdParty.Watermelon Core.Scripts.Toggle Types.Editor",
+    "rootNamespace": "",
+    "references": [
+        "UnityEditor",
+        "Watermelon"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

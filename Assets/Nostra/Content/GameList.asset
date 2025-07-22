@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -171701014, guid: d3eeb1592b7d249a4b2c17e662bb1b4c, type: 3}
+  m_Name: GameList
+  m_EditorClassIdentifier: 
+  games:
+  - gameAddress: game_colorclash
+    gameName: 
+    base_game_id: 67f66135e3f2b49b1b9a3e4c
+    gameTitleImg: {fileID: 21300000, guid: aa279eacf59164802a03d26e41b15e22, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 2c9fdee1f96c642af97e729ce1f505af, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 2457dbae22b4d45018c72f4873e9902c, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://x-stg.glance-cdn.com/public/content/assets/other/QuickPlay/color_clash/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_shapeshift
+    gameName: 
+    base_game_id: 67ff701b810d6536caa5e901
+    gameTitleImg: {fileID: 21300000, guid: e48fd9375e2434bf79bcc1dfaf29b459, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: e73f247a6b0ba4a75bd5d930e3c95dbc, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 2ccd154a2c427477ebe5100c4ed37a69, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://x-stg.glance-cdn.com/public/content/assets/other/QuickPlay/shape_shift/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_stairrace
+    gameName: 
+    base_game_id: 67f66113e3f2b49b1b9a3e4a
+    gameTitleImg: {fileID: 21300000, guid: 9cc54f5cd2f794106a882c2d08fc6f01, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 91ed7f3cc6a4844138830ad15c38dace, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: f65b8170045a64be3b10c89849d6e372, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://x-stg.glance-cdn.com/public/content/assets/other/QuickPlay/stair_race/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_jailbreak
+    gameName: 
+    base_game_id: 683ed9f30a11f2eb8aa7aba5
+    gameTitleImg: {fileID: 21300000, guid: acfc7cc4913b24364aad8c41446fcff8, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: d4502824ae9a64bbeb4a05cfcdb9ce1c, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 5e33dcb2e097e4745bae854580f51531, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://x-stg.glance-cdn.com/public/content/assets/other/QuickPlay/jail_break/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_hitmanGO
+    gameName: 
+    base_game_id: 683dca847fe1d19334ffa66f
+    gameTitleImg: {fileID: 21300000, guid: 31ca36eecaa9f428ba088014cdffd0f2, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: fbe9fb7d089b9494a83a80c709e6d40a, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: d421917c4cf854f30b553558cfe316f7, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/HitmanGo/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_bomber
+    gameName: BomberDash
+    base_game_id: 683dca847fe1d19334ffa66f
+    gameTitleImg: {fileID: 21300000, guid: c70cdb4dea8a14f878851ef3d7647f69, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 09939814228304ddcac8d7446b9dffd5, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: b390f00ef07fc4027a6572e70f6cb195, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/BomberGame/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_dangerField
+    gameName: DangerField
+    base_game_id: 683dca847fe1d19334ffa66f
+    gameTitleImg: {fileID: 21300000, guid: 86cbf028d43d248769b85b5141abf6dd, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 3ed716a23d61244b98fe09ae74dc3ddb, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 6c6a77991708d47469740770045492b6, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/DangerField/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_drawbridge
+    gameName: 
+    base_game_id: 683dca847fe1d19334ffa66f
+    gameTitleImg: {fileID: 21300000, guid: a2fad090b05524ce5854a65fd79610f6, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: e95a6e9d90c5d461692c3aaf8a293a62, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: a0e25bc0e30c541dfb977670a604ecaf, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/DrawBridge/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_carrush
+    gameName: CarRush
+    base_game_id: 683d7f9fe50397e4c37e27b5
+    gameTitleImg: {fileID: 21300000, guid: 077e6284192084cf3b740ff9a9d4c820, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 60327671a92a6406684f392c1437cd72, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: eef862d608fc74b49b3fe7d635e098b8, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/CarRush/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_zapdash
+    gameName: 
+    base_game_id: 683dca847fe1d19334ffa66f
+    gameTitleImg: {fileID: 21300000, guid: d9f90479f4da04fecb98af1335caff10, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 07c500c40785e46cc8dffee385e18e86, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 1749817466ca34b348963cd18886b42d, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/Zapdash/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0

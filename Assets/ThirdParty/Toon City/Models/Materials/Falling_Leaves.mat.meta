@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 557c51a07c2764d7ca7321a9e0d862ea
+timeCreated: 1467652913
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Models/Materials/Falling_Leaves.mat
+  uploadId: 585690

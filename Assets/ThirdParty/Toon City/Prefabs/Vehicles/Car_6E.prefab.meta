@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 9316ca20037aa460bbe7ad1129a0fa21
+labels:
+- car
+- sedan
+- vehicle
+timeCreated: 1499295628
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/Toon City/Prefabs/Vehicles/Car_6E.prefab
+  uploadId: 585690

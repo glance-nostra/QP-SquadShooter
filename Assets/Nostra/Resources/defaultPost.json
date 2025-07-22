@@ -1,0 +1,144 @@
+{
+    "post_id": "",
+    "post_type": "QUICK_PLAY_GAME_POST",
+    "post_like_count": 0,
+    "post_reaction_count": 0,
+    "post_comment_count": 0,
+    "post_share_count": 0,
+    "quick_play_interaction_count": 0,
+    "is_liked_by_user": false,
+    "meta_data": {
+        "creator_info": {}
+    },
+    "quick_play_interaction_state": "NEW",
+    "game": {
+        "name": "Party Run",
+        "description": "Party Run is a fast-paced, action-packed game that challenges players to match colors and earn points. Use your quick reflexes and strategic thinking to outshine your opponents.",
+        "address": "game_partyrun",
+        "addressDependencies": [],
+        "tags": [
+            "Color",
+            "Clash"
+        ],
+        "logoUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/GameIcons/Party_run_Icon.png",
+        "titleUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/GameIcons/Party_run_Title.png",
+        "bannerUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/GameIcons/Party_run_Banner.png",
+        "baseGameId": "",
+        "parentGameId": "",
+        "gameId": "",
+        "createdBy": "",
+        "characters": [
+            {
+                "characterId": "67d18c0b8b7a3d05180b9d9e",
+                "baseCharacterId": "67d18bf18b7a3d05180b9c97",
+                "parentCharacterId": "000000000000000000000000",
+                "name": "Cool Guy",
+                "description": "Confident, stylish, laid-back, charismatic, witty, approachable, effortless, mysterious, charming, bold",
+                "address": "guy",
+                "glbUrl": "https://x-stg.glance-cdn.com/public/content/assets/other/Models/guy.glb",
+                "thumbnailUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/CoolGuy/cool_guy_default.png",
+                "slots": [
+                    {
+                        "assetReference": {
+                            "assetType": "shirt",
+                            "thumbnailUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/CoolGuy/Thumbnails/16_70_Top_71_thumb.png",
+                            "createdBy": "67d18b871ce2bc44a932e147",
+                            "meshes": [
+                                "Top_71"
+                            ]
+                        },
+                        "assetId": "67d18bf78b7a3d05180b9cde",
+                        "offset": [],
+                        "pivotIdx": 0,
+                        "slotType": "shirt",
+                        "slotIconUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/SlotIcons/shirt_icon.png",
+                        "_id": "67d1a037c4f2c76144ef1d2b"
+                    },
+                    {
+                        "assetReference": {
+                            "assetType": "trouser",
+                            "thumbnailUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/CoolGuy/Thumbnails/1_54_Bottom_55_thumb.png",
+                            "createdBy": "67d18b871ce2bc44a932e147",
+                            "meshes": [
+                                "Bottom_55"
+                            ]
+                        },
+                        "assetId": "67d18bfd8b7a3d05180b9d15",
+                        "offset": [],
+                        "pivotIdx": 0,
+                        "slotType": "trouser",
+                        "slotIconUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/SlotIcons/trouser_icon.png",
+                        "_id": "67d1a037c4f2c76144ef1d2c"
+                    },
+                    {
+                        "assetReference": {
+                            "assetType": "shoe",
+                            "thumbnailUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/CoolGuy/Thumbnails/15_51_Shoes_52_thumb.png",
+                            "createdBy": "67d18b871ce2bc44a932e147",
+                            "meshes": [
+                                "Shoes_52"
+                            ]
+                        },
+                        "assetId": "67d18c028b7a3d05180b9d47",
+                        "offset": [],
+                        "pivotIdx": 0,
+                        "slotType": "shoe",
+                        "slotIconUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/SlotIcons/shoe_icon.png",
+                        "_id": "67d1a037c4f2c76144ef1d2d"
+                    },
+                    {
+                        "assetReference": {
+                            "createdBy": "000000000000000000000000",
+                            "meshes": []
+                        },
+                        "assetId": "000000000000000000000000",
+                        "offset": [],
+                        "pivotIdx": 0,
+                        "slotType": "hat",
+                        "slotIconUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/SlotIcons/hat_icon.png",
+                        "_id": "67d1a037c4f2c76144ef1d2e"
+                    },
+                    {
+                        "assetReference": {
+                            "createdBy": "000000000000000000000000",
+                            "meshes": []
+                        },
+                        "assetId": "000000000000000000000000",
+                        "offset": [],
+                        "pivotIdx": 0,
+                        "slotType": "goggle",
+                        "slotIconUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/SlotIcons/goggle_icon.png",
+                        "_id": "67d1a037c4f2c76144ef1d2f"
+                    },
+                    {
+                        "assetReference": {
+                            "createdBy": "000000000000000000000000",
+                            "meshes": []
+                        },
+                        "assetId": "000000000000000000000000",
+                        "offset": [],
+                        "pivotIdx": 0,
+                        "slotType": "mask",
+                        "slotIconUrl": "https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/SlotIcons/mask_icon.png",
+                        "_id": "67d1a037c4f2c76144ef1d30"
+                    }
+                ],
+                "supportedGamesIds": [
+                    "67d18cfb8b7a3d05180b9d9f",
+                    "67d18d228b7a3d05180b9da1",
+                    "67d18d388b7a3d05180b9da3",
+                    "67d18d548b7a3d05180b9da5",
+                    "67d18d6e8b7a3d05180b9da7",
+                    "67d18d828b7a3d05180b9da9",
+                    "67d18d9f8b7a3d05180b9dab",
+                    "67d18db48b7a3d05180b9dad"
+                ],
+                "createdBy": "67d18b871ce2bc44a932e147",
+                "_id": "67d1a037c4f2c76144ef1d2a",
+                "supportedGames": []
+            }
+        ],
+        "_id": "",
+        "catalogUrl": "https://x-stg.glance-cdn.com/public/content/assets/other/QuickPlay/CarRush/{0}/catalog_1.0.0.json"
+    }
+}

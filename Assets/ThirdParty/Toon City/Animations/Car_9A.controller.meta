@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 50cfea739aaeb4f249d49de2b6ce3610
+timeCreated: 1487458776
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Animations/Car_9A.controller
+  uploadId: 585690

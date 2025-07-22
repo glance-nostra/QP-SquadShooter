@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2c84d157ff65c4eeb8dddf33db1994d8
+labels:
+- road
+timeCreated: 1499163437
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/Toon City/Prefabs/Roads/Road_1R.prefab
+  uploadId: 585690

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c03ede3143de248748e6fd3fa5e0b4b5
+timeCreated: 1487458214
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Models/Materials/Light_Red.mat
+  uploadId: 585690

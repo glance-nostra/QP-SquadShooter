@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: fcfaa1198bc23459abb4c9b95e3c5223
+labels:
+- object
+- prop
+- trash
+timeCreated: 1499289952
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/Toon City/Prefabs/Props/Trash_Bag_1A.prefab
+  uploadId: 585690

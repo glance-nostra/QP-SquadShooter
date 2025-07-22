@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aac0948307111f94a84409b26aad4757
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Models/Materials/Light_Neutral.mat
+  uploadId: 585690

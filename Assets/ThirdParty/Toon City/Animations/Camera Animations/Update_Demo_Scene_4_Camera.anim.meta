@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8e899d9ee4d444550bb0e1c2e38216cf
+timeCreated: 1524134198
+licenseType: Free
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Animations/Camera Animations/Update_Demo_Scene_4_Camera.anim
+  uploadId: 585690

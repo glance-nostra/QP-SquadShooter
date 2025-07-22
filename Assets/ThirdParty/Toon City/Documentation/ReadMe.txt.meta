@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eca5e3a4e5ce146dc957ce86591e6689
+timeCreated: 1500847054
+licenseType: Free
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Documentation/ReadMe.txt
+  uploadId: 585690

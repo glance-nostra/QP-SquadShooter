@@ -1,0 +1,7 @@
+{
+    "name": "JoystickPack.Editor",
+    "references": [ "JoystickPack" ],
+    "includePlatforms": [ "Editor" ],
+    "autoReferenced": true
+  }
+  

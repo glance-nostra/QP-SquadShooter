@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e05c012ec0987b84ca046aeecb1f5935
+timeCreated: 1500650402
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Animations/Camera Animations/Demo_Scene_1D.anim
+  uploadId: 585690

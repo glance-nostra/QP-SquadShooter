@@ -1,0 +1,24 @@
+{
+    "name": "Watermelon",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:320a7f1e3dd30bf4dbb1ac85ea51c249",
+        "GUID:b144dfb63303ab24680905ee1a718def",
+        "GUID:dfd68d793e4e5c24da9f1a86e6e09fbe",
+        "GUID:58d423447910e474892c01353162b1ba",
+        "GUID:ead44b7ff0c1fef46af9d702fccc0dd9",
+        "GUID:60e58814b7969e0459416e87b0b42a14",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
