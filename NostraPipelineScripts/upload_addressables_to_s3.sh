@@ -32,7 +32,7 @@ echo -e "${YELLOW}Checking for required Node.js dependencies...${NC}"
 if [ ! -d "$SCRIPT_DIR/node_modules" ]; then
     echo "Installing Node.js dependencies..."
     cd "$SCRIPT_DIR"
-    npm install
+    npm install --registry=https://registry.npmjs.org/
     cd - > /dev/null
 fi
 

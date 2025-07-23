@@ -13,7 +13,7 @@ const CONFIG_FILE = path.join(PROJECT_ROOT, 'game_config_template.json');
 const STAGE_UPLOAD_API_ENDPOINT = 'https://turbolive-staging.glance.inmobi.com/api/v2/upload-folder';
 const PROD_UPLOAD_API_ENDPOINT = 'https://connect-api.glance.com/api/v2/upload-folder';
 const PR_NUMBER = process.env.PR_NUMBER || 'unknown-pr';
-const RESULTS_FILE = process.env.RESULTS_FILE || path.join(PROJECT_ROOT, 'addressables_upload_results.json');
+const RESULTS_FILE = path.join(PROJECT_ROOT, 'addressables_upload_results.json');
 
 // Get profile and targets from environment variables
 const PROFILE = process.env.PROFILE || null;
@@ -89,7 +89,7 @@ function getAllFiles(dir, fileList = []) {
 }
 
 // Upload a directory to S3 - original
-async function uploadToS3(sourceDir, destinationPath, profile) {
+async function uploadToS3(sourceDir, destinationPath, profile, target) {
     try {
         // Prepare to upload all files in the directory
         logInfo(`Uploading directory: ${sourceDir} to ${destinationPath}`);
@@ -159,7 +159,13 @@ async function uploadToS3(sourceDir, destinationPath, profile) {
                 // Use the first CDN URL as the base URL
                 uploadUrl = successfulUploads[0].cdn_url;
                 const basePath = new URL(uploadUrl).pathname.split('/').slice(0, -1).join('/');
-                
+                const catalogJson = successfulUploads.find(item => item.original_name.endsWith('.json'));
+
+                if (catalogJson) {
+                    uploadUrl = catalogJson.cdn_url.replace(`/${target}/`, `/{0}/`);
+                    logSuccess(`📦 Catalog JSON CDN URL (templated): ${uploadUrl}`);
+                }
+
                 logSuccess(`Uploaded ${successfulUploads.length}/${responseData.data.total_files} files successfully.`);
                 logSuccess(`Base URL path: ${basePath}`);
             } else {
@@ -182,7 +188,7 @@ async function uploadToS3(sourceDir, destinationPath, profile) {
         }
 
         return {
-            url: uploadUrl,
+            catalogUrl: uploadUrl,
             fileCount: fileCount,
             successCount: successCount
         };
@@ -219,12 +225,12 @@ async function processAddressables() {
             const destinationPath = `addressables/QuickPlay/${GAME_NAME}/${target}`;
             
             // Upload to S3
-            const uploadResult = await uploadToS3(sourceDir, destinationPath, profile);
+            const uploadResult = await uploadToS3(sourceDir, destinationPath, profile, target);
             
             if (uploadResult) {
-                const { url, fileCount, successCount } = uploadResult;
+                const { catalogUrl, fileCount, successCount } = uploadResult;
                 results.uploads[profile][target] = { 
-                    url: url,
+                    catalogUrl: catalogUrl,
                     files_total: fileCount,
                     files_uploaded: successCount
                 };
@@ -242,7 +248,7 @@ async function processAddressables() {
     
     // Return success based on whether all uploads succeeded
     const allUploadsSucceeded = Object.values(results.uploads).every(profileUploads => 
-        Object.values(profileUploads).every(upload => upload.url)
+        Object.values(profileUploads).every(upload => upload.catalogUrl)
     );
     
     return allUploadsSucceeded;

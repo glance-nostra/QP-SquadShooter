@@ -50,7 +50,6 @@ Logs/shadercompiler-UnityShaderCompiler.exe0.log
 
 # Android AAR build outputs
 Exports/
-*.aar
 logs/
 
 # DLL files in Plugins/Nostra

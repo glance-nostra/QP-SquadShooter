@@ -13,7 +13,7 @@ jobs:
       (contains(github.event.comment.body, 'verify') || contains(github.event.comment.body, 'build')) &&
       github.event.comment.user.type == 'User'&&
       github.event.comment.user.login != 'checkmarx_inmobi'
-    runs-on: qp-games-runner
+    runs-on: qp-games-runner-ravi
 
     permissions:
       contents: read
@@ -35,25 +35,23 @@ jobs:
           # Determine if verification or build was requested
           COMMENT="${{ github.event.comment.body }}"
 
-          if [[ "$COMMENT" =~ verify ]]; then
-            echo "VERIFICATION_REQUESTED=true" >> $GITHUB_ENV
-          else
-            echo "VERIFICATION_REQUESTED=false" >> $GITHUB_ENV
-          fi
-          
-          if [[ "$COMMENT" =~ build ]]; then
-            echo "BUILD_REQUESTED=true" >> $GITHUB_ENV
-          else
-            echo "BUILD_REQUESTED=false" >> $GITHUB_ENV
-          fi
-          
-          if [[ "$COMMENT" =~ skip-dll-step ]]; then
-            echo "SKIP_DLL_BUILD=true" >> $GITHUB_ENV
-          else
-            echo "SKIP_DLL_BUILD=false" >> $GITHUB_ENV
-          fi
+          set_env_flag() {
+            local keyword="$1"
+            local env_var="$2"
 
-          
+            if [[ "$COMMENT" == *"$keyword"* ]]; then
+              echo "$env_var=true" >> $GITHUB_ENV
+            else
+              echo "$env_var=false" >> $GITHUB_ENV
+            fi
+          }
+
+          set_env_flag "verify" "VERIFICATION_REQUESTED"
+          set_env_flag "build" "BUILD_REQUESTED"
+          set_env_flag "skip-dll-build" "SKIP_DLL_BUILD"
+          set_env_flag "landscape=true" "IS_LANDSCAPE_GAME"
+          set_env_flag "apk=true" "APK_REQUESTED"
+
 
       - name: Add rocket reaction to trigger comment
         id: add-rocket
@@ -141,6 +139,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ env.HEAD_BRANCH }}
+          fetch-depth: 0
       
       - name: Get Game Name
         id: get-game-name
@@ -153,6 +152,7 @@ jobs:
             if command -v jq &> /dev/null; then
               GAME_NAME=$(jq -r '.game_name' "$CONFIG_FILE")
               GAME_ADDRESS=$(jq -r '.addressable_settings.game_address' "$CONFIG_FILE")
+              GAME_NAMESPACE=$(jq -r '.namespace' "$CONFIG_FILE")
               echo "Game name and game address read from root config file: $GAME_NAME ($GAME_ADDRESS)"
             fi
           else
@@ -167,6 +167,7 @@ jobs:
           
           echo "GAME_NAME=$GAME_NAME" >> $GITHUB_ENV
           echo "GAME_ADDRESS=$GAME_ADDRESS" >> $GITHUB_ENV
+          echo "GAME_NAMESPACE=$GAME_NAMESPACE" >> $GITHUB_ENV
           echo "Final game name to be used: $GAME_NAME"
 
       - name: Verify Game Config Template
@@ -457,7 +458,48 @@ jobs:
           chmod +x ./NostraPipelineScripts/upload_addressables_to_s3.sh
           ./NostraPipelineScripts/upload_addressables_to_s3.sh
 
+          # After upload, get catalogUrl from first object in uploads array in result JSON and store in env
+          UPLOAD_RESULT_FILE="./addressables_upload_results.json"
+
+          if [ -f "$UPLOAD_RESULT_FILE" ]; then
+            FIRST_TARGET=$(echo "$TARGETS" | cut -d',' -f1 | xargs)
+            CATALOG_URL=$(jq -r ".uploads[\"$PROFILE\"][\"$FIRST_TARGET\"].catalogUrl" "$UPLOAD_RESULT_FILE")
+            echo "CATALOG_URL=$CATALOG_URL" >> $GITHUB_ENV
+            echo "Catalog URL stored in env: $CATALOG_URL"
+          else
+            echo "::warning::Upload completed but no addressables_upload_results.json was found"
+          fi
         
+
+      - name: Build Standalone Game Testing APK
+        if: env.BUILD_REQUESTED == 'true' && env.APK_REQUESTED == 'true' && contains(steps.parse-command.outputs.build_targets, 'Android')
+        continue-on-error: true
+        env:
+          GAME_NAME: ${{ env.GAME_NAME }}
+          GAME_ADDRESS: ${{ env.GAME_ADDRESS }}
+          CATALOG_URL: ${{ env.CATALOG_URL }}
+          DLL_URL: ${{ env.DLL_URL }}
+          IS_LANDSCAPE_GAME: ${{ env.IS_LANDSCAPE_GAME || 'false' }}
+          GAME_NAMESPACE: ${{ env.GAME_NAMESPACE }}
+        run: |
+          echo "🏗️ Building Android APK..."
+          chmod +x ./NostraPipelineScripts/build_standalone_apk.sh
+          ./NostraPipelineScripts/build_standalone_apk.sh
+          if [ ! -f "./Builds/Android/app.apk" ]; then
+            echo "::error::APK build failed: ./Builds/Android/app.apk not found"
+            exit 1
+          fi
+          echo "✅ Android APK built successfully at ./Builds/Android/app.apk"
+
+      - name: Upload Standalone Testing APK
+        id: upload_standalone_apk
+        continue-on-error: true
+        if: env.BUILD_REQUESTED == 'true' && env.APK_REQUESTED == 'true' && contains(steps.parse-command.outputs.build_targets, 'Android')
+        run: |
+          echo "🚀 Uploading Android APK..."
+          chmod +x ./NostraPipelineScripts/upload_standalone_apk.sh
+          ./NostraPipelineScripts/upload_standalone_apk.sh
+
       - name: Add final reaction to trigger comment
         if: always()
         continue-on-error: true
@@ -497,6 +539,7 @@ jobs:
             const targets = '${{ steps.parse-command.outputs.build_targets }}' || 'Not specified';
             const workflowUrl = `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
             const dllUrl = '${{ env.DLL_URL }}' || null;
+            const standaloneApkUrl = '${{ steps.upload_standalone_apk.outputs.standalone_apk_url }}' || null;
 
             // Parse the verification results JSON
             let verifyResults = {};
@@ -548,6 +591,9 @@ jobs:
                 if (dllUrl) {
                   commentBody += `### 📥 Download\n` +
                                  `**Game DLL:** [Download](${ dllUrl })\n`;
+                }
+                if (standaloneApkUrl) {
+                  commentBody += `**Testing APK:** [Download](${ standaloneApkUrl })\n`;
                 }
             } else { 
                 commentBody += `**Verification:** ${verificationStatus}\n\n`;

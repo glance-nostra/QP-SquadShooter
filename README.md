@@ -66,7 +66,9 @@ The repository includes a GitHub Actions workflow that automates the process of 
 **Parameters for `build` command:**
 
 - `env`: Environment to target (staging, production)
-- `targets`: Comma-separated build targets (android, ios, webgl, standaloneosx)
+- `targets`: Comma-separated build targets (android,ios,standaloneosx,standalonewindows64,webgl)
+- `apk=true`: This will build the standalone testing apk
+- `landscape=true`: Pass this if your game is landscape
 
 Note: Parameters like `env` and `targets` are only needed for the `build` command, not for `verify`.
 
@@ -77,9 +79,9 @@ Validates the game's scripts and DLL against QuickPlay guidelines.
 verify
 ```
 
-Builds and uploads addressables for Android platform to the staging environment.
+Builds and uploads addressables for Android and mac editor platform to the staging environment and also build the testing apk.
 ```
-build env=staging targets=android
+build env=staging targets=android,standaloneosx apk=true
 ```
 
 Builds and uploads addressables for Android and iOS platform to the production environment.
