@@ -1,0 +1,20 @@
+{
+    "name": "Nostra.Editor.Plugins.Dreamteck.Splines.Editor",
+    "rootNamespace": "",
+    "references": [
+        "UnityEditor",
+        "Dreamteck",
+        "Nostra.Editor.Plugins.Dreamteck.Utilities.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 000327b3f73e7bd41830e829c0cc0e27
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/Toon City/ToonShading/Shaders/TC_CustomToonOutline.mat
+  uploadId: 585690

@@ -110,12 +110,14 @@ MonoBehaviour:
   - 683eda215afbf34a89ea430b
   - 67ff726b3215a02f9557ff0a
   - 683ef5535afbf34a89ea5174
-  - 67ff72523215a02f9557feea
+  - 683d804869035009437797f0
   prodPostIds:
   - 67f4dc93b6b6833aee5a4a03
   - 67f4dc8b27e69e30ab21e08b
   - 683edc1364185a7b19ed0439
   - 685137baa0c9e003d7fc144c
+  - 683ef4f9f1bf4156da16cff8
+  - 683e8c04e7739495e78f77bb
 --- !u!1 &78715373401457098
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 2
-  m_AspectRatio: 1
+  m_AspectRatio: 1.185
 --- !u!1 &850952413845392465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,7 +1880,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4d8152fc94cba4261bbdee8d034e1927, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 077e6284192084cf3b740ff9a9d4c820, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2275,7 +2277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 2
-  m_AspectRatio: 1
+  m_AspectRatio: 1.185
 --- !u!1 &2412061379812560552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2903,7 +2905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2267261504049765777
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3912,7 +3914,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 7866666965963039136}
   m_OnClick:
     m_PersistentCalls:
@@ -5378,7 +5380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1610822432210773320
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5394,9 +5396,9 @@ RectTransform:
   - {fileID: 4368084538784260672}
   m_Father: {fileID: 947849283830888002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -236}
   m_SizeDelta: {x: 208, y: 44}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &5799238998672499835
@@ -5488,7 +5490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 2
-  m_AspectRatio: 1
+  m_AspectRatio: 1.185
 --- !u!1 &5805453079504565360
 GameObject:
   m_ObjectHideFlags: 0
@@ -5706,7 +5708,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d9e98edcc29fc4c298a91ffcf2fda5a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 360149608136f4cb2805d49d3097439a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5729,7 +5731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 2
-  m_AspectRatio: 1
+  m_AspectRatio: 1.185
 --- !u!1 &6022556639354868630
 GameObject:
   m_ObjectHideFlags: 0
@@ -5995,7 +5997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8486311842135228246
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6011,9 +6013,9 @@ RectTransform:
   - {fileID: 8608483650807179378}
   m_Father: {fileID: 699316626392692398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -236}
   m_SizeDelta: {x: 208, y: 44}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6315445579104882594
@@ -7372,7 +7374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 2
-  m_AspectRatio: 1
+  m_AspectRatio: 1.185
 --- !u!1 &7797485023976541627
 GameObject:
   m_ObjectHideFlags: 0
@@ -7709,7 +7711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8045310773831450044
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8675,7 +8677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 2
-  m_AspectRatio: 1
+  m_AspectRatio: 1.185
 --- !u!1 &9160350878811797050
 GameObject:
   m_ObjectHideFlags: 0

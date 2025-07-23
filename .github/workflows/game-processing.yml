@@ -46,6 +46,12 @@ jobs:
           else
             echo "BUILD_REQUESTED=false" >> $GITHUB_ENV
           fi
+          
+          if [[ "$COMMENT" =~ skip-dll-step ]]; then
+            echo "SKIP_DLL_BUILD=true" >> $GITHUB_ENV
+          else
+            echo "SKIP_DLL_BUILD=false" >> $GITHUB_ENV
+          fi
 
           
 
@@ -95,6 +101,7 @@ jobs:
               ios) echo "iOS" ;;
               webgl) echo "WebGL" ;;
               standaloneosx) echo "StandaloneOSX" ;;
+              standalonewindows64) echo "StandaloneWindows64" ;;
               *) echo "" ;;
             esac
           }
@@ -145,7 +152,8 @@ jobs:
             # Check if jq is installed
             if command -v jq &> /dev/null; then
               GAME_NAME=$(jq -r '.game_name' "$CONFIG_FILE")
-              echo "Game name read from root config file: $GAME_NAME"
+              GAME_ADDRESS=$(jq -r '.addressable_settings.game_address' "$CONFIG_FILE")
+              echo "Game name and game address read from root config file: $GAME_NAME ($GAME_ADDRESS)"
             fi
           else
             echo "Config file not found at $CONFIG_FILE"
@@ -158,6 +166,7 @@ jobs:
           fi
           
           echo "GAME_NAME=$GAME_NAME" >> $GITHUB_ENV
+          echo "GAME_ADDRESS=$GAME_ADDRESS" >> $GITHUB_ENV
           echo "Final game name to be used: $GAME_NAME"
 
       - name: Verify Game Config Template
@@ -222,6 +231,7 @@ jobs:
           
       
       - name: Extract and Remap DLLs
+        if: env.SKIP_DLL_BUILD == 'false'
         id: extract-dlls
         run: |
           chmod +x ./NostraPipelineScripts/extract_remap_game_dll.sh
@@ -229,6 +239,7 @@ jobs:
       
       
       - name: List Generated DLLs
+        if: env.SKIP_DLL_BUILD == 'false'
         run: ls -la ./Assets/Games/${{ env.GAME_NAME }}
 
       - name: Setup .NET and Tools
@@ -393,6 +404,43 @@ jobs:
           echo "ADDRESSABLES_BUILD_RESULTS<<EOF" >> $GITHUB_ENV
           cat "$BUILD_RESULTS_FILE" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
+
+          if( [ $BUILD_EXIT_CODE -ne 0 ] ); then
+            # Extract the clean output
+            OUTPUT="$CLEAN_OUTPUT"
+
+            # Find all 'Starting Addressable build' lines and print the last one
+            echo "🔍 Searching for lines that start with 'Starting Addressable build'"
+            echo "$OUTPUT" | grep "Starting Addressable build"
+
+            # Grab the last line starting with "Starting Addressable build"
+            LAST_LINE=$(echo "$OUTPUT" | grep "Starting Addressable build" | tail -n 1)
+
+            echo "🧩 Last build line: $LAST_LINE"
+
+            FAILED_BUILD_TARGET=$(echo "$LAST_LINE" | sed -n 's/.*(\([^)]*\)).*/\1/p')
+            FAILED_PROFILE=$(echo "$LAST_LINE" | sed -n 's/.*profile \([^.]*\).*/\1/p')
+
+            echo "🎯 Failed Build Target: $FAILED_BUILD_TARGET"
+            echo "🔧 Failed Build Profile: $FAILED_PROFILE"
+
+            # Log path based on build
+            PLATFORM_PATH="."  # adjust if needed
+            LOG_PATH="$PLATFORM_PATH/logs/addressables_${FAILED_BUILD_TARGET}_${FAILED_PROFILE}_build.log"
+
+            echo "Looking for log file at: $LOG_PATH"
+
+            if [[ -f "$LOG_PATH" ]]; then
+              echo "✅ Found log file. Uploading:"
+              chmod +x ./NostraPipelineScripts/upload_logfile.sh
+              ./NostraPipelineScripts/upload_logfile.sh "$LOG_PATH"
+            else
+              echo "❌ Log file not found: $LOG_PATH"
+            fi
+            echo "::error::Addressables build failed for target: $FAILED_BUILD_TARGET, profile: $FAILED_PROFILE, check logs above"
+          else
+            echo "✅ Addressables build completed successfully"
+          fi
           
           # Exit with the original exit code
           exit $BUILD_EXIT_CODE
@@ -486,7 +534,9 @@ jobs:
 
             // Create the comment with horizontal line after heading
             let commentBody = `### Game Processing Results\n---\n\n` +
-                              `**Triggered by:** @${{ github.event.comment.user.login }}\n`;
+                              `**Triggered by:** @${{ github.event.comment.user.login }}\n` +
+                              `**Game:** ${{ env.GAME_NAME }}\n` +
+                              `**Game Address:** ${{ env.GAME_ADDRESS }}\n\n`;
             
             // Structure the comment differently based on what was requested
             if (buildRequested) {
@@ -607,3 +657,8 @@ jobs:
               body: commentBody
             });
             
+      - name: Cleanup workspace
+        if: always()
+        run: |
+          echo "Cleaning workspace at $GITHUB_WORKSPACE"
+          rm -rf $GITHUB_WORKSPACE/*

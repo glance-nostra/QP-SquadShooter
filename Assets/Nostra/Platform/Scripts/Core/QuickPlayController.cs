@@ -117,6 +117,7 @@ namespace nostra.platform.Core
         }
         public void FeedLoaded(int _postCount, bool _isMorePostsAvailable)
         {
+            Debug.Log($"Feed Loaded with Post Count: {_postCount}, More Posts Available: {_isMorePostsAvailable}");
             if (isScrollSnapInitialized == false)
             {
                 isScrollSnapInitialized = true;
@@ -172,17 +173,25 @@ namespace nostra.platform.Core
         }
         public List<PostDto> GetDefaultPosts()
         {
+            int index = 0;
             List<PostDto> defaultPosts = new List<PostDto>();
             TextAsset textAsset = Resources.Load<TextAsset>("defaultPost");
             if (textAsset != null)
             {
-                var postData = JsonUtility.FromJson<PostDto>(textAsset.text);
+                var postData = Newtonsoft.Json.JsonConvert.DeserializeObject<PostDto>(textAsset.text);
                 foreach (var post in m_testGamePosts)
                 {
-                    postData.game.address = post.addressablePath;
-                    postData.game.name = post.name;
-                    postData.catalogUrl = post.catalogUrl;
-                    defaultPosts.Add(postData);
+                    PostDto postDto = new PostDto();
+                    postDto.post_id = $"Post_{index}";
+                    postDto.post_type = postData.post_type;
+                    postDto.game.gameId = $"Post_{index}";
+                    postDto.game.address = post.addressablePath;
+                    postDto.game.name = post.name;
+                    postDto.catalogUrl = post.catalogUrl;
+                    postDto.game.characters = postData.game.characters;
+                    postDto.game.isLandscapeGame = post.isLandscapeGame;
+                    defaultPosts.Add(postDto);
+                    index++;
                 }
             }
             return defaultPosts;

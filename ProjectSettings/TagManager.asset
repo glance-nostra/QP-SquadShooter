@@ -65,7 +65,7 @@ TagManager:
   - QP_Layer_22
   - QP_Layer_23
   - QP_Layer_24
-  - recording
+  - IGNORE_COLLISION
   - Platform
   m_SortingLayers:
   - name: Default

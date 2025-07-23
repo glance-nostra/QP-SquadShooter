@@ -1,0 +1,26 @@
+{
+    "name": "Nostra.Editor.ThirdParty.Watermelon Core.Scripts.Editor",
+    "rootNamespace": "",
+    "references": [
+        "UnityEditor",
+        "Watermelon",
+        "Unity.TextMeshPro",
+        "Core.Inspector.Editor",
+        "Nostra.Editor.ThirdParty.Watermelon Core.Modules.Initializer.Scripts.Editor",
+        "Core.Settings",
+        "Core.Settings.Editor",
+        "Core.UE.Editor",
+        "Core.UE"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

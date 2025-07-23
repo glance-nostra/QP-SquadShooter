@@ -1,0 +1,19 @@
+{
+    "name": "Nostra.Editor.Plugins.Dreamteck.Utilities.Editor",
+    "rootNamespace": "",
+    "references": [
+        "UnityEditor",
+        "Dreamteck"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

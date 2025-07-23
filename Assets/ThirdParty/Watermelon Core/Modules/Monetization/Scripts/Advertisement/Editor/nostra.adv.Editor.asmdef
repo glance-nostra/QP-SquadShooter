@@ -1,0 +1,20 @@
+{
+    "name": "nostra.adv.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:15bb0125a21ce44999acc3625423f6a5",
+        "GUID:b144dfb63303ab24680905ee1a718def",
+        "GUID:58d423447910e474892c01353162b1ba"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

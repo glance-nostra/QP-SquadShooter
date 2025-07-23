@@ -8,10 +8,10 @@
         "version_code": 18
     },
     "userInfo": {
-        "user_id": "c78c7fad-f756-424b-b117-133da6f8a328",
-        "user_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VySW5mbyIsInVzZXJJZCI6IjcyMGE3ZjA4LTYzNzUtNDUzYi1hN2M0LWE4YzMwYWI2OWMyNiIsImNvbW11bml0eVVzZXJJZCI6IjY2YTBlYTZjODkwNjY4ZjJkODdmNWFjOCIsImlhdCI6MTc0NDExOTk1NCwiZXhwIjoxNzUxODk1OTU0fQ.sthz--2VJtPx09_Q_NI5BUP4toXdRmxL8BYLlur41sQ",
-        "user_profile_url": "https://g-mob-gaming-non-prod.glance-cdn.com/avatar/66a0ea6c890668f2d87f5ac8/67ef6514457a54ca9ff4e439/reactor_faceswap/e2462c.webp",
-        "user_name": "pocod"
+        "user_id": "a7b73ec5-bad0-46a1-a64e-1137ab9d67d3",
+        "user_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VySW5mbyIsInVzZXJJZCI6IjZhOTI2OTEzLWJmZmItNGQ3MC1iMmQ1LTY2Njg4OTUzNjNkZCIsImNvbW11bml0eVVzZXJJZCI6IjY4NjYzYmI2YTY0NGMyZmU4Njg2ZjhkYSIsImlhdCI6MTc1MTg5NzY2MywiZXhwIjoxNzU5NjczNjYzfQ.ZG9_fPtkJEvrOgh6_LjuwuMgXAmx1GTEHp9Tlqh6n_Y",
+        "user_profile_url": "https://gcs.dev.glance.com/public/content/assets/xiaomi/avtart:a7.png",
+        "user_name": "You"
     },
     "isUserLoggedIn": true,
     "unityData": null

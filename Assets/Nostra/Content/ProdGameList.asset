@@ -49,3 +49,57 @@ MonoBehaviour:
     canLoadGame: 1
     catalogUrl: https://g-mob.glance-cdn.com/public/content/assets/other/QuickPlay/jail_break/{0}/catalog_0.0.3.json
     isLandscapeGame: 0
+  - gameAddress: game_dangerField
+    gameName: 
+    base_game_id: 683ef4b48c5d5076b93bac31
+    gameTitleImg: {fileID: 21300000, guid: 86cbf028d43d248769b85b5141abf6dd, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 3ed716a23d61244b98fe09ae74dc3ddb, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 6c6a77991708d47469740770045492b6, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-cdn.glance-cdn.com/storage/addressables/QuickPlay/DangerField/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_bomber
+    gameName: 
+    base_game_id: 687105c7228ed5c15320a39a
+    gameTitleImg: {fileID: 21300000, guid: c70cdb4dea8a14f878851ef3d7647f69, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 09939814228304ddcac8d7446b9dffd5, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: b390f00ef07fc4027a6572e70f6cb195, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-cdn.glance-cdn.com/storage/addressables/QuickPlay/BomberGame/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_carrush
+    gameName: 
+    base_game_id: 683e8905a808c941ed1f0546
+    gameTitleImg: {fileID: 21300000, guid: 077e6284192084cf3b740ff9a9d4c820, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 60327671a92a6406684f392c1437cd72, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: eef862d608fc74b49b3fe7d635e098b8, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-cdn.glance-cdn.com/storage/addressables/QuickPlay/CarRush/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_drawbridge
+    gameName: 
+    base_game_id: 6871066503fba408dcc8adfd
+    gameTitleImg: {fileID: 21300000, guid: a2fad090b05524ce5854a65fd79610f6, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: e95a6e9d90c5d461692c3aaf8a293a62, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: a0e25bc0e30c541dfb977670a604ecaf, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-cdn.glance-cdn.com/storage/addressables/QuickPlay/DrawBridge/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_hitmanGO
+    gameName: 
+    base_game_id: 687106ca86446d9fa0220fce
+    gameTitleImg: {fileID: 21300000, guid: 31ca36eecaa9f428ba088014cdffd0f2, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: fbe9fb7d089b9494a83a80c709e6d40a, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: d421917c4cf854f30b553558cfe316f7, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-cdn.glance-cdn.com/storage/addressables/QuickPlay/HitmanGo/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_zapdash
+    gameName: 
+    base_game_id: 683ef4a07a5b5622779e1d34
+    gameTitleImg: {fileID: 21300000, guid: d9f90479f4da04fecb98af1335caff10, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 07c500c40785e46cc8dffee385e18e86, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 1749817466ca34b348963cd18886b42d, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-cdn.glance-cdn.com/storage/addressables/QuickPlay/Zapdash/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0

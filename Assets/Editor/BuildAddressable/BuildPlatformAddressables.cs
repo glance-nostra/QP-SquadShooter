@@ -12,7 +12,7 @@ using System.IO;
 /// </summary>
 public class BuildPlatformAddressables
 {
-    private static readonly string[] ValidBuildTargets = { "Android", "iOS", "WebGL", "StandaloneOSX" };
+    private static readonly string[] ValidBuildTargets = { "Android", "iOS", "WebGL", "StandaloneOSX", "StandaloneWindows64" };
     
     private struct PlatformBuildConfig
     {

@@ -1,0 +1,16 @@
+{
+    "name": "Nostra.Editor.ThirdParty.Watermelon Core.Modules.Haptic.Scripts.Editor",
+    "references": [
+        "UnityEditor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

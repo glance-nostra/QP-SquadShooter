@@ -151,6 +151,7 @@ namespace NostraTools.Editor
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            AssetDatabase.ImportAsset(searchDirectory, ImportAssetOptions.ImportRecursive);
             Debug.Log("✅ MonoScript remapping complete.");
         }
 

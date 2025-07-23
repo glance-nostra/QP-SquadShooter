@@ -49,7 +49,7 @@ const profiles = PROFILE ? [PROFILE] : ['Staging', 'Production'];
 logInfo(`Processing profiles: ${profiles.join(', ')}`);
 
 // Determine targets to process
-const targets = TARGETS || ['Android', 'iOS', 'WebGL', 'StandaloneOSX'];
+const targets = TARGETS || ['Android', 'iOS', 'WebGL', 'StandaloneOSX', 'StandaloneWindows64'];
 logInfo(`Processing targets: ${targets.join(', ')}`);
 
 // Create a dummy index.html file

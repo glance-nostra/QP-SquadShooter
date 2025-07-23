@@ -1,198 +1,84 @@
 fileFormatVersion: 2
 guid: 52b8a73c9591d4dd2a3328cad4b2a315
+timeCreated: 1497994561
+licenseType: Free
 ModelImporter:
-  serializedVersion: 22200
-  internalIDToNameTable:
-  - first:
-      1: 100000
-    second: //RootNode
-  - first:
-      1: 100002
-    second: Building_17B_Addon
-  - first:
-      1: 100004
-    second: Logo_17B
-  - first:
-      1: 100006
-    second: Title_17B.L
-  - first:
-      1: 100008
-    second: Title_17B.R
-  - first:
-      1: 100010
-    second: Window_Lights_17B
-  - first:
-      1: 100012
-    second: Building_17B
-  - first:
-      1: 100014
-    second: Wheel_9A_F.L
-  - first:
-      1: 100016
-    second: Wheel_9A_F.R
-  - first:
-      1: 100018
-    second: Wheel_9A_R.L
-  - first:
-      1: 100020
-    second: Wheel_9A_R.R
-  - first:
-      4: 400000
-    second: //RootNode
-  - first:
-      4: 400002
-    second: Building_17B_Addon
-  - first:
-      4: 400004
-    second: Logo_17B
-  - first:
-      4: 400006
-    second: Title_17B.L
-  - first:
-      4: 400008
-    second: Title_17B.R
-  - first:
-      4: 400010
-    second: Window_Lights_17B
-  - first:
-      4: 400012
-    second: Building_17B
-  - first:
-      4: 400014
-    second: Wheel_9A_F.L
-  - first:
-      4: 400016
-    second: Wheel_9A_F.R
-  - first:
-      4: 400018
-    second: Wheel_9A_R.L
-  - first:
-      4: 400020
-    second: Wheel_9A_R.R
-  - first:
-      23: 2300000
-    second: //RootNode
-  - first:
-      23: 2300002
-    second: Building_17B_Addon
-  - first:
-      23: 2300004
-    second: Logo_17B
-  - first:
-      23: 2300006
-    second: Title_17B.L
-  - first:
-      23: 2300008
-    second: Title_17B.R
-  - first:
-      23: 2300010
-    second: Window_Lights_17B
-  - first:
-      23: 2300012
-    second: Building_17B
-  - first:
-      23: 2300014
-    second: Wheel_9A_F.L
-  - first:
-      23: 2300016
-    second: Wheel_9A_F.R
-  - first:
-      23: 2300018
-    second: Wheel_9A_R.L
-  - first:
-      23: 2300020
-    second: Wheel_9A_R.R
-  - first:
-      33: 3300000
-    second: //RootNode
-  - first:
-      33: 3300002
-    second: Building_17B_Addon
-  - first:
-      33: 3300004
-    second: Logo_17B
-  - first:
-      33: 3300006
-    second: Title_17B.L
-  - first:
-      33: 3300008
-    second: Title_17B.R
-  - first:
-      33: 3300010
-    second: Window_Lights_17B
-  - first:
-      33: 3300012
-    second: Building_17B
-  - first:
-      33: 3300014
-    second: Wheel_9A_F.L
-  - first:
-      33: 3300016
-    second: Wheel_9A_F.R
-  - first:
-      33: 3300018
-    second: Wheel_9A_R.L
-  - first:
-      33: 3300020
-    second: Wheel_9A_R.R
-  - first:
-      43: 4300000
-    second: Building_17B
-  - first:
-      43: 4300002
-    second: Title_17B.R
-  - first:
-      43: 4300004
-    second: Title_17B.L
-  - first:
-      43: 4300006
-    second: Logo_17B
-  - first:
-      43: 4300008
-    second: Building_17B_Addon
-  - first:
-      43: 4300010
-    second: Window_Lights_17B
-  - first:
-      43: 4300012
-    second: Wheel_9A_F.L
-  - first:
-      43: 4300014
-    second: Wheel_9A_F.R
-  - first:
-      43: 4300016
-    second: Wheel_9A_R.L
-  - first:
-      43: 4300018
-    second: Wheel_9A_R.R
-  externalObjects: {}
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Building_17B_Addon
+    100004: Logo_17B
+    100006: Title_17B.L
+    100008: Title_17B.R
+    100010: Window_Lights_17B
+    100012: Building_17B
+    100014: Wheel_9A_F.L
+    100016: Wheel_9A_F.R
+    100018: Wheel_9A_R.L
+    100020: Wheel_9A_R.R
+    400000: //RootNode
+    400002: Building_17B_Addon
+    400004: Logo_17B
+    400006: Title_17B.L
+    400008: Title_17B.R
+    400010: Window_Lights_17B
+    400012: Building_17B
+    400014: Wheel_9A_F.L
+    400016: Wheel_9A_F.R
+    400018: Wheel_9A_R.L
+    400020: Wheel_9A_R.R
+    2300000: //RootNode
+    2300002: Building_17B_Addon
+    2300004: Logo_17B
+    2300006: Title_17B.L
+    2300008: Title_17B.R
+    2300010: Window_Lights_17B
+    2300012: Building_17B
+    2300014: Wheel_9A_F.L
+    2300016: Wheel_9A_F.R
+    2300018: Wheel_9A_R.L
+    2300020: Wheel_9A_R.R
+    3300000: //RootNode
+    3300002: Building_17B_Addon
+    3300004: Logo_17B
+    3300006: Title_17B.L
+    3300008: Title_17B.R
+    3300010: Window_Lights_17B
+    3300012: Building_17B
+    3300014: Wheel_9A_F.L
+    3300016: Wheel_9A_F.R
+    3300018: Wheel_9A_R.L
+    3300020: Wheel_9A_R.R
+    4300000: Building_17B
+    4300002: Title_17B.R
+    4300004: Title_17B.L
+    4300006: Logo_17B
+    4300008: Building_17B_Addon
+    4300010: Window_Lights_17B
+    4300012: Wheel_9A_F.L
+    4300014: Wheel_9A_F.R
+    4300016: Wheel_9A_R.L
+    4300018: Wheel_9A_R.R
   materials:
-    materialImportMode: 1
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
-    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -200,49 +86,25 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 1
-    sortHierarchyByName: 1
-    importPhysicalCameras: 0
-    importVisibility: 0
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
-    nodeNameCollisionStrategy: 0
-    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
+    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    bakeAxisConversion: 0
-    preserveHierarchy: 0
-    skinWeightsMode: 0
-    maxBonesPerVertex: 4
-    minBoneWeight: 0.001
-    optimizeBones: 1
-    meshOptimizationFlags: -1
-    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
-    secondaryUVMinLightmapResolution: 40
-    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
-    strictVertexDataChecks: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 0
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
-    blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
-  referencedClips: []
   importAnimation: 1
+  copyAvatar: 0
   humanDescription:
-    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -252,20 +114,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
-    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
-  avatarSetup: 0
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  importBlendShapeDeformPercent: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/ThirdParty/Toon City/Models/Building_17B.fbx
+  uploadId: 585690

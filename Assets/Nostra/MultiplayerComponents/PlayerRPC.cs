@@ -12,7 +12,6 @@ public class PlayerRPC : NetworkBehaviour, IPlayerRPCInterface
 {
 	[SerializeField] GameObject characterGraphics;
 	[SerializeField] PlayerToken m_token;
-	NostraCharacter m_character;
 	MultiplayerService m_multiplayerService;
 	MultiplayerRoomInfo m_multiplayerRoomInfo;
 	
@@ -22,7 +21,6 @@ public class PlayerRPC : NetworkBehaviour, IPlayerRPCInterface
 
 	public void Init()
 	{
-		m_character = GetComponent<NostraCharacter>();
 		m_multiplayerService = FindAnyObjectByType<MultiplayerService>();
 		m_initialized = true;
 		m_multiplayerRoomInfo = FindAnyObjectByType<MultiplayerRoomInfo>();
@@ -61,6 +59,11 @@ public class PlayerRPC : NetworkBehaviour, IPlayerRPCInterface
 		RPC_RequestRoomCreationTimeBroadcast();
 	}
 
+	public void StartMpGameBroadcast()
+	{
+		RPC_StartMpGameBroadcast();
+	}
+
 	public override void Despawned(NetworkRunner runner, bool hasState)
 	{
 		base.Despawned(runner,hasState);
@@ -85,23 +88,22 @@ public class PlayerRPC : NetworkBehaviour, IPlayerRPCInterface
 		if(!m_initialized) Init();
 		var token = PlayerToken.FromBytes(tokenRaw);
 		m_token = token;
-		var joinedMesage = new PlayerJoinedMessage() {token = token};
-		QuickPlay.Messaging.Publish(joinedMesage,this);
+		var joinedMessage = new PlayerJoinedMessage() {token = token};
+		QuickPlay.Messaging.Publish(joinedMessage,this);
 	}
 	[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    	void RPC_BroadcastCharacterTokenApplication(byte[] tokenRaw)
-    	{
+    void RPC_BroadcastCharacterTokenApplication(byte[] tokenRaw)
+    {
 		if(!m_initialized) Init();
-		if(m_character == null) return;
 		var slotsJson = GzipUtils.Decompress(tokenRaw);
 		var slots = JsonConvert.DeserializeObject<List<SlotsDto>>(slotsJson);
 		var message = new MultiplayerCustomizeMessage()
 		{
-			character = m_character,
+			playerRefId = Object.StateAuthority.PlayerId,
 			data = slots.ToArray()
 		};
 		QuickPlay.Messaging.Publish(message, this);
-    	}
+    }
 	[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
 	void RPC_ChangeVisibility(bool val)
 	{
@@ -146,5 +148,12 @@ public class PlayerRPC : NetworkBehaviour, IPlayerRPCInterface
 			Debug.Log("J:RPC replying by setting Room Creation Time to : " + m_multiplayerRoomInfo.nRoomCreationEpochTime);
 			RPC_SetRoomCreationTime(m_multiplayerRoomInfo.nRoomCreationEpochTime);
 		}
+	}
+
+	[Rpc(RpcSources.All, RpcTargets.All)]
+	void RPC_StartMpGameBroadcast()
+	{
+		Debug.Log("J: RPC StartMpGameBroadcast");
+		QuickPlay.Messaging.Publish(new MultiplayerGameStartMessage(),this);
 	}
 }

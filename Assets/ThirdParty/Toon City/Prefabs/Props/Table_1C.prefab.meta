@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7f425186c53ec4e1a9b068e7053ae600
+labels:
+- object
+- prop
+timeCreated: 1499288811
+licenseType: Free
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88379
+  packageName: Toon City
+  packageVersion: 1.4.1
+  assetPath: Assets/Toon City/Prefabs/Props/Table_1C.prefab
+  uploadId: 585690

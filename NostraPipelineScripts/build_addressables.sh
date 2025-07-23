@@ -23,7 +23,7 @@ CONFIG_FILE="$PLATFORM_PATH/game_config_template.json"
 if [ -n "$TARGETS" ]; then
     IFS=',' read -ra BUILD_TARGETS <<< "$TARGETS"
 else
-    BUILD_TARGETS=("Android" "iOS" "WebGL" "StandaloneOSX")
+    BUILD_TARGETS=("Android" "iOS" "WebGL" "StandaloneOSX" "StandaloneWindows64")
     echo -e "${YELLOW}No targets specified, building for all 4 default targets${NC}"
 fi
 

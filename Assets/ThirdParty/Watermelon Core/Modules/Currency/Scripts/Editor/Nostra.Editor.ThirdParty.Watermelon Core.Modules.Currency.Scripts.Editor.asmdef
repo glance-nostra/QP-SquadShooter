@@ -1,0 +1,24 @@
+{
+    "name": "Nostra.Editor.ThirdParty.Watermelon Core.Modules.Currency.Scripts.Editor",
+    "rootNamespace": "",
+    "references": [
+        "UnityEditor",
+        "Watermelon",
+        "Nostra.Editor.ThirdParty.Watermelon Core.Modules.Initializer.Scripts.Editor",
+        "Unity.TextMeshPro",
+        "Core.Inspector.Editor",
+        "Core.UE.Editor",
+        "Core.UE"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

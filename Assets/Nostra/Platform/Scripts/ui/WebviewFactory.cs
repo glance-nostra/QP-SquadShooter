@@ -44,12 +44,7 @@ namespace nostra.platform.webview
             webView.BackgroundColor = Color.clear;
             blockerCanvas.SetActive(true);
             webView.Frame = frameRect;
-            if(cookie == null)
-            {
-                webView.Load(url);
-                webView.Show();
-            }
-            else
+            if(cookie != null)
             {
                 var cookieString = "";
                 for(int i=0; i < cookie.Length; i++)
@@ -61,15 +56,20 @@ namespace nostra.platform.webview
                 {
                     Debug.Log($"cookie string: {cookieString}");
                 });
-                webView.Load(url);
-                webView.Show();
             }
+            webView.Load(url);
         }
         public void CallJS(string _jsmethod)
         {
             Debug.Log($"called : {_jsmethod}");
             webView.EvaluateJavaScript(_jsmethod);
         }
+
+        public void ShowWebView()
+        {
+            webView.Show();
+        }
+
         public async void HideWebView()
         {
             switch(m_type)
