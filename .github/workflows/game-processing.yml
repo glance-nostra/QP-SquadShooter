@@ -280,10 +280,14 @@ jobs:
           which dotnet
           dotnet --version
           
-          # Install ilspycmd globally
-          echo "Installing ilspycmd with .NET 8..."
-          dotnet tool install --global ilspycmd
-          
+          # Install ilspycmd globally if not already installed
+          if ! command -v ilspycmd &> /dev/null; then
+            echo "Installing ilspycmd with .NET 8..."
+            dotnet tool install --global ilspycmd
+          else
+            echo "ilspycmd already installed"
+            # dotnet tool update --global ilspycmd
+          fi
           # Add .NET tools to PATH locally
           export PATH="$PATH:$HOME/.dotnet/tools"
           
