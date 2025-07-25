@@ -481,6 +481,7 @@ jobs:
         
 
       - name: Build Standalone Game Testing APK
+        id: build-standalone-apk
         if: env.BUILD_REQUESTED == 'true' && env.APK_REQUESTED == 'true' && contains(steps.parse-command.outputs.build_targets, 'Android')
         env:
           GAME_NAME: ${{ env.GAME_NAME }}
@@ -551,6 +552,8 @@ jobs:
       - name: Add job completion comment
         if: always()
         uses: actions/github-script@v7
+        env:
+          APK_STACK_TRACE: ${{ steps.build-standalone-apk.outputs.stackTrace }}
         with:
           script: |
             const { owner, repo } = context.repo;
@@ -631,7 +634,7 @@ jobs:
             // Add additional information for failures - adjust based on what was requested
             if (
               (!buildRequested && !verificationSuccess) ||
-              (buildRequested && (!verificationSuccess || !uploadSuccess || !addressablesSuccess))
+              (buildRequested && (!verificationSuccess || !uploadSuccess || !addressablesSuccess || !apkSuccess))
             ) {
               commentBody += '\n\n### ⚠️ Issues Detected\n';
               
@@ -689,38 +692,22 @@ jobs:
                 commentBody += '\n```\n';
                 commentBody += '</details>\n';
               }
+
+              if (apkRequested && !apkSuccess) {
+                commentBody += '- APK build failed. See build report below.\n';
+                // Add APK build report in a collapsible section
+                const apkBuildLog = process.env.APK_STACK_TRACE || 'Check logs for details';
+                commentBody += '\n<details>\n';
+                commentBody += '<summary>📊 APK Build Report</summary>\n\n';
+                commentBody += '```\n';
+                commentBody += apkBuildLog;
+                commentBody += '\n```\n';
+                commentBody += '</details>\n';
+              }
               
               commentBody += '\nPlease fix these issues before proceeding.';
             } else {
               commentBody += '\n\n🚀 All checks passed!\n';
-              
-              if (buildRequested) {
-                if (dllUrl) {
-                  commentBody += ' The DLL has been successfully processed and uploaded. You can download it using the link above.';
-                } else {
-                  commentBody += ' The DLLs are ready for use, but upload failed or was skipped.';
-                }
-                
-                if (addressablesSuccess) {
-                  commentBody += `\nAddressables were successfully built for environment: \`${{ steps.parse-command.outputs.build_env }}\` and targets: \`${{ steps.parse-command.outputs.build_targets }}\`.`;
-                }
-              } else {
-                commentBody += ' Verification completed successfully. The code meets all the required standards.';
-              }
-              
-              // Add verification reports in collapsible sections even for successful runs
-              commentBody += '\n\n<details>\n';
-              commentBody += '<summary>📊 Verification Reports</summary>\n\n';
-              
-              commentBody += '**Scripts Verification:**\n```\n';
-              commentBody += verifyResults.scripts_verify_output || 'No output available';
-              commentBody += '\n```\n\n';
-              
-              commentBody += '**DLL Verification:**\n```\n';
-              commentBody += verifyResults.dll_verify_output || 'No output available';
-              commentBody += '\n```\n';
-              
-              commentBody += '</details>\n';
             }
             
             await github.rest.issues.createComment({

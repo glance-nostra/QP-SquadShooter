@@ -125,5 +125,25 @@ if [ $UNITY_EXIT_CODE -eq 0 ] && [ -f "$APK_PATH" ]; then
     echo -e "${GREEN}Android APK build completed successfully!${NC}"
 else
     echo -e "${RED}Android APK build failed! Check logs for details.${NC}"
+    
+    if grep -q "\[BuildTestingAPK\] Android APK build failed" "$LOG_PATH"; then
+        line_num=$(grep -n "\[BuildTestingAPK\] Android APK build failed" "$LOG_PATH" | head -n1 | cut -d: -f1)
+        start_line=$((line_num > 50 ? line_num - 50 : 1))
+        echo -e "${YELLOW}Printing 50 lines above the failure marker in $LOG_PATH:${NC}"
+        
+        STACK_TRACE=$(sed -n "${start_line},${line_num}p" "$LOG_PATH")
+        echo "$STACK_TRACE"
+
+        # ✅ Export multiline output safely
+        if [[ -n "$GITHUB_OUTPUT" ]]; then
+            {
+              echo "stackTrace<<EOF"
+              echo "$STACK_TRACE"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+        fi
+    else
+        echo -e "${YELLOW}Failure marker not found in $LOG_PATH.${NC}"
+    fi
     exit 1
 fi
