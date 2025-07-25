@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets.Build;
+using System.Collections.Generic;
 
 namespace nostra.platform.build
 {
@@ -85,8 +86,18 @@ namespace nostra.platform.build
                             lines[i + 2] = $"    addressablePath: {gameAddress}";
                         if (i + 3 < lines.Length && lines[i + 3].TrimStart().StartsWith("catalogUrl:"))
                             lines[i + 3] = $"    catalogUrl: {catalogUrl}";
+                        // Check if line 4 (i+4) is "isLandscapeGame:"
                         if (i + 4 < lines.Length && lines[i + 4].TrimStart().StartsWith("isLandscapeGame:"))
+                        {
                             lines[i + 4] = $"    isLandscapeGame: {isLandscapeGame}";
+                        }
+                        else
+                        {
+                            // Insert the line if it's missing
+                            var updatedLines = new List<string>(lines);
+                            updatedLines.Insert(i + 4, $"    isLandscapeGame: {isLandscapeGame}");
+                            lines = updatedLines.ToArray();
+                        }
                     }
                 }
                 File.WriteAllLines(scenePath, lines);

@@ -105,6 +105,7 @@ else
 fi
 
 echo -e "${YELLOW}Starting Android APK build for $GAME_NAME...${NC}"
+set +e  # temporarily disable immediate exit
 "$UNITY_PATH" -batchmode -quit -projectPath "$PLATFORM_PATH" \
     -executeMethod nostra.platform.build.BuildTestingAPK.BuildStandaloneTestingAPK \
     -buildTarget Android \
@@ -115,9 +116,14 @@ echo -e "${YELLOW}Starting Android APK build for $GAME_NAME...${NC}"
     -logFile "$LOG_PATH" \
     -outputAPK "$APK_PATH"
 
-if [ $? -eq 0 ] && [ -f "$APK_PATH" ]; then
-    echo -e "${GREEN}Android APK build completed successfully! APK at $APK_PATH${NC}"
+UNITY_EXIT_CODE=$?
+
+set -e  # re-enable
+echo "Unity exited with $UNITY_EXIT_CODE"
+
+if [ $UNITY_EXIT_CODE -eq 0 ] && [ -f "$APK_PATH" ]; then
+    echo -e "${GREEN}Android APK build completed successfully!${NC}"
 else
-    echo -e "${RED}Android APK build failed! Check $LOG_PATH for details.${NC}"
+    echo -e "${RED}Android APK build failed! Check logs for details.${NC}"
     exit 1
 fi

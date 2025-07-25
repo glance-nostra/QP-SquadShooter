@@ -164,6 +164,11 @@ jobs:
             echo "::error::Game name could not be determined from comment or config file"
             exit 1
           fi
+
+          if [ -z "$GAME_NAMESPACE" ] || [ "$GAME_NAMESPACE" == "namespace" ]; then
+            echo "::error::Game namespace is missing or incorrect"
+            exit 1
+          fi
           
           echo "GAME_NAME=$GAME_NAME" >> $GITHUB_ENV
           echo "GAME_ADDRESS=$GAME_ADDRESS" >> $GITHUB_ENV
@@ -477,7 +482,6 @@ jobs:
 
       - name: Build Standalone Game Testing APK
         if: env.BUILD_REQUESTED == 'true' && env.APK_REQUESTED == 'true' && contains(steps.parse-command.outputs.build_targets, 'Android')
-        continue-on-error: true
         env:
           GAME_NAME: ${{ env.GAME_NAME }}
           GAME_ADDRESS: ${{ env.GAME_ADDRESS }}
@@ -488,7 +492,28 @@ jobs:
         run: |
           echo "🏗️ Building Android APK..."
           chmod +x ./NostraPipelineScripts/build_standalone_apk.sh
-          ./NostraPipelineScripts/build_standalone_apk.sh
+
+          set +e  # Allow errors temporarily
+          # Run the build and capture output
+          BUILD_OUTPUT=$(./NostraPipelineScripts/build_standalone_apk.sh 2>&1)
+          BUILD_EXIT_CODE=$?
+          set -e  # Re-enable error checking
+
+          if( [ $BUILD_EXIT_CODE -ne 0 ] ); then
+            LOG_PATH="./logs/apk_build.log"
+
+            echo "Looking for log file at: $LOG_PATH"
+
+            if [[ -f "$LOG_PATH" ]]; then
+              echo "✅ Found log file. Uploading:"
+              chmod +x ./NostraPipelineScripts/upload_logfile.sh
+              ./NostraPipelineScripts/upload_logfile.sh "$LOG_PATH"
+            else
+              echo "❌ Log file not found: $LOG_PATH"
+            fi
+            exit $BUILD_EXIT_CODE
+          fi
+
           if [ ! -f "./Builds/Android/app.apk" ]; then
             echo "::error::APK build failed: ./Builds/Android/app.apk not found"
             exit 1
@@ -497,7 +522,6 @@ jobs:
 
       - name: Upload Standalone Testing APK
         id: upload_standalone_apk
-        continue-on-error: true
         if: env.BUILD_REQUESTED == 'true' && env.APK_REQUESTED == 'true' && contains(steps.parse-command.outputs.build_targets, 'Android')
         run: |
           echo "🚀 Uploading Android APK..."
@@ -538,12 +562,14 @@ jobs:
             const gameConfigVerificationSuccess = '${{ steps.verify-game-config.outcome }}' === 'success';
             const uploadSuccess = '${{ steps.upload-dll.outcome }}' === 'success' && '${{ steps.upload-dll.outcome }}' !== 'skipped';
             const buildRequested = '${{ env.BUILD_REQUESTED }}' === 'true';
+            const apkRequested = '${{ env.APK_REQUESTED }}' === 'true';
             const addressablesSuccess = buildRequested ? ('${{ steps.build-addressables.outcome }}' === 'success') : true;
             const env = '${{ steps.parse-command.outputs.build_env }}' || 'Not specified';
             const targets = '${{ steps.parse-command.outputs.build_targets }}' || 'Not specified';
             const workflowUrl = `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
             const dllUrl = '${{ env.DLL_URL }}' || null;
             const standaloneApkUrl = '${{ steps.upload_standalone_apk.outputs.standalone_apk_url }}' || null;
+            const apkSuccess = apkRequested && standaloneApkUrl !== null && standaloneApkUrl !== '';
 
             // Parse the verification results JSON
             let verifyResults = {};
@@ -572,12 +598,8 @@ jobs:
             // Status emojis
             const verificationStatus = verificationSuccess ? '✅ Success' : '❌ Failed';
             const uploadStatus = uploadSuccess ? '✅ Success' : (verificationSuccess ? '⚠️ Failed' : '⏭️ Skipped');
-            
-            // Get addressables build status
-            let addressablesStatus = '⏭️ Skipped';
-            if (buildRequested) {
-                addressablesStatus = addressablesSuccess ? '✅ Success' : '❌ Failed';
-            }
+            const addressablesStatus = addressablesSuccess ? '✅ Success' : (buildRequested ? '❌ Failed' : '⏭️ Skipped');
+            const apkStatus = apkSuccess ? '✅ Success' : (apkRequested ? '❌ Failed' : '⏭️ Skipped');
 
             // Create the comment with horizontal line after heading
             let commentBody = `### Game Processing Results\n---\n\n` +
@@ -589,6 +611,7 @@ jobs:
             if (buildRequested) {
                 commentBody += `**Verification:** ${verificationStatus}\n`;
                 commentBody += `**Build Addressables:** ${addressablesStatus}\n`;
+                commentBody += `**APK Build:** ${apkStatus}\n`;
                 commentBody += `  - Environment: \`${env}\`\n`;
                 commentBody += `  - Targets: \`${targets}\`\n\n`;
 
