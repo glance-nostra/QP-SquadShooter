@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace nostra.platform.webview
@@ -16,6 +15,7 @@ namespace nostra.platform.webview
 
         private void Awake()
         {
+            UniWebView.SetWebContentsDebuggingEnabled(true);
             blockerCanvas.SetActive(false);
             UniWebView.SetWebContentsDebuggingEnabled(true);
             webView.SetWindowUserResizeEnabled(true);
@@ -36,6 +36,16 @@ namespace nostra.platform.webview
                 m_callback?.Invoke(webviewEventData);
                 OnWebviewOpened?.Invoke();
             };
+        }
+        public void OpenUrl(string url, Rect frameRect, WebViewType _type, Action<WebviewEventData> _callback)
+        {
+            m_type = _type;
+            m_callback = _callback;
+            webView.BackgroundColor = Color.clear;
+            blockerCanvas.SetActive(true);
+            webView.Frame = frameRect;
+            webView.Load(url);
+            webView.Show();
         }
         public void OpenUrl(string url, Rect frameRect, WebViewType _type, Action<WebviewEventData> _callback, CookieData[] cookie)
         {
@@ -59,6 +69,18 @@ namespace nostra.platform.webview
             }
             webView.Load(url);
         }
+        public void SetCookies(string _key, string _value, string url)
+        {
+            string cookieString = string.Empty;
+            if (!string.IsNullOrEmpty(_key) && !string.IsNullOrEmpty(_value))
+            {
+                cookieString = $"{_key}={_value}";
+            }
+            UniWebView.SetCookie(url, cookieString, () =>
+            {
+                Debug.Log($"Cookie set: {cookieString} for URL: {url}");
+            });
+        }
         public void CallJS(string _jsmethod)
         {
             Debug.Log($"called : {_jsmethod}");
@@ -72,7 +94,7 @@ namespace nostra.platform.webview
 
         public async void HideWebView()
         {
-            switch(m_type)
+            switch (m_type)
             {
                 case WebViewType.COMMENTS:
                     CallJS("clearPostInfo");
