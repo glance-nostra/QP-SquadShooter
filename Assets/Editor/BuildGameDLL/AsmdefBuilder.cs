@@ -49,7 +49,8 @@ namespace NostraTools.Editor
             "Unity.Mathematics",
             "Unity.InputSystem",
             "Unity.AI.Navigation",  
-            "JoystickPack"        // Added JoystickPack as an assembly reference
+            "JoystickPack",        // Added JoystickPack as an assembly reference
+            "Unity.Cinemachine"
         };
 
         // Common Nostra references (moved to precompiled references)
@@ -273,9 +274,6 @@ namespace NostraTools.Editor
                 
                 autoReferenced[0] = EditorGUILayout.Toggle("Auto Referenced", autoReferenced[0] == "true").ToString().ToLower();
                 noEngineReferences[0] = EditorGUILayout.Toggle("No Engine References", noEngineReferences[0] == "true").ToString().ToLower();
-                
-                // Show the default namespace that will be used
-                EditorGUILayout.HelpBox($"Namespace will be: nostra.sarvottam.{gameName.ToLower()}", MessageType.Info);
                 
                 EditorGUI.indentLevel--;
             }
@@ -552,6 +550,28 @@ namespace NostraTools.Editor
             }
         }
 
+        [Serializable]
+        private class GameConfigTemplate
+        {
+            public string @namespace;
+        }
+
+        private string GetRootNamespaceFromConfig()
+        {
+            string configPath = Path.Combine(Application.dataPath, "../game_config_template.json");
+            if (!File.Exists(configPath))
+                return null;
+            try
+            {
+                string json = File.ReadAllText(configPath);
+                var config = JsonUtility.FromJson<GameConfigTemplate>(json);
+                if (!string.IsNullOrEmpty(config.@namespace))
+                    return config.@namespace;
+            }
+            catch { }
+            return null;
+        }
+
         private void ValidateGameName()
         {
             if (string.IsNullOrEmpty(gameName))
@@ -586,6 +606,7 @@ namespace NostraTools.Editor
         {
             return $"{gameScriptsPath}/{gameName}.dll";
         }
+
         private string GenerateAsmdefJson()
         {
             // Ensure all precompiled references have .dll extension
@@ -596,10 +617,8 @@ namespace NostraTools.Editor
                     precompiledReferences[i] += ".dll";
                 }
             }
-            
-            // Always use the default namespace format
-            string rootNamespace = $"nostra.sarvottam.{gameName.ToLower()}";
-            
+            // Try to get rootNamespace from config, fallback to default
+            string rootNamespace = GetRootNamespaceFromConfig() ?? $"nostra.qp.{gameName.ToLower()}";
             // Create asmdef object
             var asmdef = new Dictionary<string, object>
             {

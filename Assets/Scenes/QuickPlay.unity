@@ -1860,6 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: -1002996050, guid: d3eeb1592b7d249a4b2c17e662bb1b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ApplicationVersion: 0.0.6
   m_characterParent: {fileID: 1952945619}
 --- !u!1 &408759693
 GameObject:
@@ -2289,6 +2290,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 842878964}
     m_Modifications:
+    - target: {fileID: 642238201850463480, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2643c73ae8f540468c88887e83d8c09, type: 3}
+    - target: {fileID: 5159276280451510992, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5835648599699722962, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2368,6 +2377,14 @@ PrefabInstance:
     - target: {fileID: 5835648599699722962, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367521600508569935, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a8153c89cc5cb4a71867a03ccc309bbc, type: 3}
+    - target: {fileID: 6968451053711878907, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7495328263314209074, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
       propertyPath: m_Name
@@ -2796,6 +2813,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 842878964}
     m_Modifications:
+    - target: {fileID: 642238201850463480, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2643c73ae8f540468c88887e83d8c09, type: 3}
+    - target: {fileID: 5159276280451510992, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5835648599699722962, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2875,6 +2900,14 @@ PrefabInstance:
     - target: {fileID: 5835648599699722962, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367521600508569935, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a8153c89cc5cb4a71867a03ccc309bbc, type: 3}
+    - target: {fileID: 6968451053711878907, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7495328263314209074, guid: 462d70d8c163f43f9a8029d910910a39, type: 3}
       propertyPath: m_Name
@@ -8846,6 +8879,7 @@ MonoBehaviour:
   - name: Car Racing
     addressablePath: game_carracing
     catalogUrl: 
+    isLandscapeGame: 0
 --- !u!1 &2060300070
 GameObject:
   m_ObjectHideFlags: 0

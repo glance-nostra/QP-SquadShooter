@@ -27,7 +27,7 @@ MonoBehaviour:
     base_game_id: 67ff701b810d6536caa5e901
     gameTitleImg: {fileID: 21300000, guid: e48fd9375e2434bf79bcc1dfaf29b459, type: 3}
     gameBannerImg: {fileID: 21300000, guid: e73f247a6b0ba4a75bd5d930e3c95dbc, type: 3}
-    gameLogoImg: {fileID: 21300000, guid: 2ccd154a2c427477ebe5100c4ed37a69, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: e73f247a6b0ba4a75bd5d930e3c95dbc, type: 3}
     canLoadGame: 1
     catalogUrl: https://x-stg.glance-cdn.com/public/content/assets/other/QuickPlay/shape_shift/{0}/catalog_0.0.3.json
     isLandscapeGame: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
     gameName: 
     base_game_id: 683dca847fe1d19334ffa66f
     gameTitleImg: {fileID: 21300000, guid: 31ca36eecaa9f428ba088014cdffd0f2, type: 3}
-    gameBannerImg: {fileID: 21300000, guid: fbe9fb7d089b9494a83a80c709e6d40a, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 1c388e3ab51254a46a6a1b73fab8176a, type: 3}
     gameLogoImg: {fileID: 21300000, guid: d421917c4cf854f30b553558cfe316f7, type: 3}
     canLoadGame: 1
     catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/HitmanGo/{0}/catalog_0.0.3.json
@@ -102,4 +102,49 @@ MonoBehaviour:
     gameLogoImg: {fileID: 21300000, guid: 1749817466ca34b348963cd18886b42d, type: 3}
     canLoadGame: 1
     catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/Zapdash/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_mallmania
+    gameName: MallMania
+    base_game_id: 6880a7bac078a995b5864f29
+    gameTitleImg: {fileID: 21300000, guid: 985e89cfa75fe437ea7dbf9877262900, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 21949dbd5f20f45f9bf6eaa486422ed8, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: a9ff7e7b095db42b7afde8c40938ef7e, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/MallMania/{0}/catalog_0.0.3.json
+    isLandscapeGame: 0
+  - gameAddress: game_archarygame
+    gameName: ArcharyGame
+    base_game_id: 68807d5c57226724da4fe188
+    gameTitleImg: {fileID: 21300000, guid: d2643c73ae8f540468c88887e83d8c09, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: a8153c89cc5cb4a71867a03ccc309bbc, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 74d8f325b5d9b4118bdb2653d9332657, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/ArcharyGame/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_skateboard
+    gameName: Skateboard
+    base_game_id: 6880aa93da529a19b31adc5c
+    gameTitleImg: {fileID: 21300000, guid: b6f65aa07e2a54de7bfdfcc2aac45bb1, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: dced59d870633470ea234a8c948338f1, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: a7c8cbb9364a24072805af7e785d9f95, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/Skateboard/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_hexagonfall
+    gameName: HexagonFall
+    base_game_id: 6880ead4cc26ebc4b79c1db4
+    gameTitleImg: {fileID: 21300000, guid: 0de24ebd7c747485d8e6fdc34b262e24, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 51f5e2d91144b4d95b7e44eefccc7c2e, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 1be08aae398364928a7a2fa7125d0ac9, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/HexagonFall/{0}/catalog_0.0.4.json
+    isLandscapeGame: 0
+  - gameAddress: game_devourio
+    gameName: DevourIo
+    base_game_id: 688224b53c313013d2500d85
+    gameTitleImg: {fileID: 21300000, guid: a9200b683647b48a3bbbc31f28d168b7, type: 3}
+    gameBannerImg: {fileID: 21300000, guid: 5a6079026c8a54a8780a4fa1b619242c, type: 3}
+    gameLogoImg: {fileID: 21300000, guid: 5a6079026c8a54a8780a4fa1b619242c, type: 3}
+    canLoadGame: 1
+    catalogUrl: https://g-mob-community-staging-cdn.glance-cdn.com/storage/addressables/QuickPlay/DevourIo/{0}/catalog_0.0.5.json
     isLandscapeGame: 0

@@ -29,4 +29,19 @@
    <assembly fullname="Zapdash">
     <type fullname="nostra.SarvotamSolutions.EpicRunner" preserve="all"/>
   </assembly>
+  <assembly fullname="MallMania">
+    <type fullname="nostra.origami.mymall" preserve="all"/>
+  </assembly>
+  <assembly fullname="ArcharyGame">
+    <type fullname="nostra.SarvathomSolution.Archery" preserve="all"/>
+  </assembly>
+  <assembly fullname="Skateboard">
+    <type fullname="nostra.SarvotamSolutions.SkateboardObby" preserve="all"/>
+  </assembly>
+  <assembly fullname="HexagonFall">
+    <type fullname="nostra.SarvotamSolutions.HexagonFall" preserve="all"/>
+  </assembly>
+  <assembly fullname="DevourIo">
+    <type fullname="nostra.SarvotamSolutions.DevourIO" preserve="all"/>
+  </assembly>
 </linker>

@@ -13,6 +13,7 @@ namespace nostra.platform.webview
 
         private void Awake()
         {
+            UniWebView.SetWebContentsDebuggingEnabled(true);
             blockerCanvas.SetActive(false);
             webView.OnShouldClose += (view) =>
             {
@@ -39,13 +40,25 @@ namespace nostra.platform.webview
             webView.Load(url);
             webView.Show();
         }
+        public void SetCookies(string _key, string _value, string url)
+        {
+            string cookieString = string.Empty;
+            if (!string.IsNullOrEmpty(_key) && !string.IsNullOrEmpty(_value))
+            {
+                cookieString = $"{_key}={_value}";
+            }
+            UniWebView.SetCookie(url, cookieString, () =>
+            {
+                Debug.Log($"Cookie set: {cookieString} for URL: {url}");
+            });
+        }
         public void CallJS(string _jsmethod)
         {
             webView.EvaluateJavaScript(_jsmethod);
         }
         public void HideWebView()
         {
-            switch(m_type)
+            switch (m_type)
             {
                 case WebViewType.COMMENTS:
                     CallJS("clearPostInfo");
