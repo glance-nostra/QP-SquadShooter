@@ -20,6 +20,7 @@ public class BuildPlatformAddressables
         public string BuildTarget;
         public string BuildPath;
         public string LoadPath;
+        public string CatalogVersion;
     }
 
 
@@ -67,12 +68,16 @@ public class BuildPlatformAddressables
             defaultProfile = "Staging"; // Fallback to a default profile if none is set
         }
         
+        // Get bundle version for catalog versioning
+        string defaultBundleVersion = PlayerSettings.bundleVersion;
+
         var config = new PlatformBuildConfig 
         { 
             Profile = GetArgValue(args, "-profile", defaultProfile),
             BuildTarget = GetArgValue(args, "-buildTarget", "Android"),
             BuildPath = GetArgValue(args, "-buildPath", ""),
-            LoadPath = GetArgValue(args, "-loadPath", "")
+            LoadPath = GetArgValue(args, "-loadPath", ""),
+            CatalogVersion = GetArgValue(args, "-catalogVersion", defaultBundleVersion)
         };
 
         if (!ValidBuildTargets.Contains(config.BuildTarget))
@@ -81,6 +86,8 @@ public class BuildPlatformAddressables
                 $"Invalid build target: {config.BuildTarget}. Valid targets are: {string.Join(", ", ValidBuildTargets)}");
         }
 
+        PlayerSettings.bundleVersion = config.CatalogVersion;
+        
         return config;
     }
 
