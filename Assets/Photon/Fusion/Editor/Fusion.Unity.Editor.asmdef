@@ -24,11 +24,8 @@
         "Fusion.Runtime.dll",
         "Fusion.Realtime.dll",
         "Fusion.Log.dll",
-        "Sirenix.OdinInspector.Editor.dll",
-        "Sirenix.Utilities.Editor.dll",
-        "Sirenix.Utilities.dll",
-        "Sirenix.OdinInspector.Attributes.dll",
-        "Newtonsoft.Json.dll"
+        "Newtonsoft.Json.dll",
+        "NanoSockets.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

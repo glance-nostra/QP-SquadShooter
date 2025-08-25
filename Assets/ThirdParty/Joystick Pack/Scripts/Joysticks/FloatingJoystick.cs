@@ -5,22 +5,31 @@ using UnityEngine.EventSystems;
 
 public class FloatingJoystick : Joystick
 {
+    public bool fixedJoystick;
     protected override void Start()
     {
         base.Start();
-        background.gameObject.SetActive(false);
+        if (fixedJoystick)
+        {
+            background.gameObject.SetActive(false);
+        }
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
-        background.gameObject.SetActive(true);
+        if (fixedJoystick)
+        {
+            background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
+            background.gameObject.SetActive(true);
+        }
         base.OnPointerDown(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        background.gameObject.SetActive(false);
+        if (fixedJoystick) { 
+            background.gameObject.SetActive(false);
+        }
         base.OnPointerUp(eventData);
     }
 }

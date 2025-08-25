@@ -12,9 +12,9 @@
     },
     "quick_play_interaction_state": "NEW",
     "game": {
-        "name": "Party Run",
+        "name": "SquadShooter",
         "description": "Party Run is a fast-paced, action-packed game that challenges players to match colors and earn points. Use your quick reflexes and strategic thinking to outshine your opponents.",
-        "address": "game_partyrun",
+        "address": "game_squadshooter",
         "addressDependencies": [],
         "tags": [
             "Color",
@@ -139,6 +139,6 @@
             }
         ],
         "_id": "",
-        "catalogUrl": "https://x-stg.glance-cdn.com/public/content/assets/other/QuickPlay/CarRush/{0}/catalog_1.0.0.json"
+        "catalogUrl": "https://x-stg.glance-cdn.com/public/content/assets/other/QuickPlay/SquadShooter/{0}/catalog_1.0.0.json"
     }
 }

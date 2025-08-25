@@ -40,6 +40,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e296bb2e485da9441a2c1d90042f83e2
+    m_Address: game_squadShooter
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 56998aaa0b3e346cf8cd1972c2b6976c, type: 2}
   m_SchemaSet:

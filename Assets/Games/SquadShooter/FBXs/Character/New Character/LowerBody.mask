@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LowerBody
+  m_Mask: 01000000000000000000000001000000010000000000000000000000000000000000000001000000010000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Body_ArmA_1
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Body_LegB_2
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Body_Neck
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Bottom_11
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Earring_10
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Eye_1
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Eyebrow_6
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Hair_14
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Head
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/lips_8
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Shoes_12
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Top_25
+    m_Weight: 1
+  - m_Path: Boy_Mesh_Grp/Watch_3
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Left_Leg_Jnt_01
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Left_Leg_Jnt_01/Boy_Left_Leg_Jnt_02
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Left_Leg_Jnt_01/Boy_Left_Leg_Jnt_02/Boy_Left_Leg_Jnt_03
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Left_Leg_Jnt_01/Boy_Left_Leg_Jnt_02/Boy_Left_Leg_Jnt_03/Boy_Left_Leg_Jnt_04
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Left_Leg_Jnt_01/Boy_Left_Leg_Jnt_02/Boy_Left_Leg_Jnt_03/Boy_Left_Leg_Jnt_04/Boy_Left_Leg_Jnt_05
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Right_Leg_Jnt_01
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Right_Leg_Jnt_01/Boy_Right_Leg_Jnt_02
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Right_Leg_Jnt_01/Boy_Right_Leg_Jnt_02/Boy_Right_Leg_Jnt_03
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Right_Leg_Jnt_01/Boy_Right_Leg_Jnt_02/Boy_Right_Leg_Jnt_03/Boy_Right_Leg_Jnt_04
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Right_Leg_Jnt_01/Boy_Right_Leg_Jnt_02/Boy_Right_Leg_Jnt_03/Boy_Right_Leg_Jnt_04/Boy_Right_Leg_Jnt_05
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Head_Jnt_01
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Head_Jnt_01/Boy_Head_Jnt_02
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Head_Jnt_01/Boy_Head_Jnt_02/Boy_Head_Jnt_03
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Left_Shoulder_Jnt_01
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Left_Shoulder_Jnt_01/Boy_Left_Hand_Jnt_02
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Left_Shoulder_Jnt_01/Boy_Left_Hand_Jnt_02/Boy_Left_Hand_Jnt_03
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Left_Shoulder_Jnt_01/Boy_Left_Hand_Jnt_02/Boy_Left_Hand_Jnt_03/Boy_Left_Hand_Jnt_04
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Right_Shoulder_Jnt_01
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Right_Shoulder_Jnt_01/Boy_Right_Hand_Jnt_02
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Right_Shoulder_Jnt_01/Boy_Right_Hand_Jnt_02/Boy_Right_Hand_Jnt_03
+    m_Weight: 1
+  - m_Path: Boy_Spine_Jnt_01/Boy_Spine_Jnt_02/Boy_Spine_Jnt_03/Boy_Spine_Jnt_04/Boy_Spine_Jnt_05/Boy_Spine_Jnt_06/Boy_Spine_Jnt_07/Boy_Right_Shoulder_Jnt_01/Boy_Right_Hand_Jnt_02/Boy_Right_Hand_Jnt_03/Boy_Right_Hand_Jnt_04
+    m_Weight: 1

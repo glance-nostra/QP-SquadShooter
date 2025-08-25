@@ -31,7 +31,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     [SerializeField] private bool snapX = false;
     [SerializeField] private bool snapY = false;
 
-    public RectTransform background = null;
+    [SerializeField] protected RectTransform background = null;
     [SerializeField] private RectTransform handle = null;
     private RectTransform baseRect = null;
 
@@ -50,7 +50,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             Debug.LogError("The Joystick is not placed inside a canvas");
 
         Vector2 center = new Vector2(0.5f, 0.5f);
-        background.pivot = center;
+        //background.pivot = center;
         handle.anchorMin = center;
         handle.anchorMax = center;
         handle.pivot = center;
@@ -62,7 +62,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         OnDrag(eventData);
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData)
     {
         cam = null;
         if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
@@ -128,11 +128,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         }
         return 0;
     }
-    public void resetJoystick()
-    {
-        input = Vector2.zero;
-        handle.anchoredPosition = Vector2.zero;
-    }
+
     public virtual void OnPointerUp(PointerEventData eventData)
     {
         input = Vector2.zero;

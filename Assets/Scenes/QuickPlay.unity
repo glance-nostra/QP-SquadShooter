@@ -4810,11 +4810,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700588063258526348, guid: dcdcceafa046e47aaa40cb73a3c9a75b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1700588063258526348, guid: dcdcceafa046e47aaa40cb73a3c9a75b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1700588063258526348, guid: dcdcceafa046e47aaa40cb73a3c9a75b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4826,11 +4826,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700588063258526348, guid: dcdcceafa046e47aaa40cb73a3c9a75b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1700588063258526348, guid: dcdcceafa046e47aaa40cb73a3c9a75b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1890495836916304115, guid: dcdcceafa046e47aaa40cb73a3c9a75b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8987,10 +8987,10 @@ MonoBehaviour:
   m_nostraShare: {fileID: 7321809}
   m_gltfSettings: {fileID: 1, guid: 53a08e39e21e645c7a5327399c9912a4, type: 2}
   m_overlayPanel: {fileID: 1870292738}
-  m_quickPlayType: 3
+  m_quickPlayType: 2
   m_testGamePosts:
-  - name: Car Racing
-    addressablePath: game_carracing
+  - name: SquadShooter
+    addressablePath: game_squadShooter
     catalogUrl: 
     isLandscapeGame: 0
 --- !u!1 &2060300070
